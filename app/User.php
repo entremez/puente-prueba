@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -27,13 +28,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function provider()
-    {
-        return $this->belongsTo('App\Provider', 'type_id', 'id');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo('App\Company', 'type_id', 'id');
+    public function name(){
+        switch (Auth::user()->type) {
+            case 'Admin':
+                $object = $this->hasOne('App\Admin', 'id', 'type_id');
+                break;
+            case 'Provider':
+                $object = $this->hasOne('App\Provider', 'id', 'type_id');
+                break;
+            case 'Company':
+                $object = $this->hasOne('App\Company', 'id', 'type_id');
+                break;
+        }
+        return $object->get()->first()->name;
     }
 }

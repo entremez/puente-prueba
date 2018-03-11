@@ -24,6 +24,7 @@ class CreateProvidersTable extends Migration
             $table->string('logo')->nullable();
             $table->string('description')->nullable();
             $table->text('long_description')->nullable();
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

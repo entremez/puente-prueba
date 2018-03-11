@@ -15,7 +15,11 @@ Route::get('/', 'HomeController@welcome' );
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth','provider');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin/dashboard', 'Admin\AdminController@index')->middleware('auth','admin')->name('dashboard');
+Route::get('/admin/dashboard/providers', 'Admin\AdminController@showProviders')->middleware('auth','admin')->name('providers');
+Route::get('/admin/dashboard/companies', 'Admin\AdminController@showCompanies')->middleware('auth','admin')->name('companies');
 
 //RUTAS PROVEEDORES
 

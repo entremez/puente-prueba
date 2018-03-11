@@ -23,20 +23,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            $type = Auth::user()->type;
-            $user = Auth::user()->$type;
+        if(auth()->check()){
+            if (auth()->user()->type == "Admin") {
+                return view('admin/dashboard');
+            }
         }
-        return view('home')->with(compact('user'));
+
+        return view('home');
     }
 
     public function welcome()
     {
-        if(Auth::check()){
-            $type = Auth::user()->type;
-            $user = Auth::user()->$type;
-        }
-        dd(Auth::user()->type);
-        return view('welcome')->with(compact('user'));
+        return view('welcome');
     }
 }
