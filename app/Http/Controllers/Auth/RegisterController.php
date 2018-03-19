@@ -56,14 +56,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $rut = $this->getRut($data['rut']);
         return Validator::make($data, [
             'name' => 'required|string|min:6',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'rut' => 'required',
-            'rut' => new RutValidate(),
-            'rut' => new RutCompanyUnique(),
+            'rut' => ['required',new RutValidate(),new RutCompanyUnique()],
+            'size' => 'required|integer|not_in:0'
         ]);
     }
 
@@ -92,6 +90,6 @@ class RegisterController extends Controller
     }
 
     private function getRut($rut){
-        return Rut::parse($rut)->toArray();
+         return Rut::parse($rut)->toArray();
     }
 }

@@ -12,10 +12,10 @@ class RutValidate implements Rule
      *
      * @return void
      */
-    public function __construct()
+/*    public function __construct()
     {
         //
-    }
+    }*/
 
     /**
      * Determine if the validation rule passes.
@@ -26,7 +26,7 @@ class RutValidate implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Rut::parse($value)->quiet()->validate() ;
+        return Rut::parse($value)->quiet()->validate();
     }
 
     /**

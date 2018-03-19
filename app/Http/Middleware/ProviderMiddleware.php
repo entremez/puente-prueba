@@ -16,8 +16,8 @@ class ProviderMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->type != "Provider")
-            return redirect('/');
-        return $next($request);
+        if(Auth::user()->type == "Provider")
+            return $next($request);
+        return back();
     }
 }

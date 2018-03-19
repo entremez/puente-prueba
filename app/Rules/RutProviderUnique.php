@@ -3,6 +3,8 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use App\Provider;
+use Freshwork\ChileanBundle\Rut;
 
 class RutProviderUnique implements Rule
 {
@@ -25,7 +27,8 @@ class RutProviderUnique implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        $rut = Rut::parse($value)->toArray();
+        return !Provider::where('rut', '=', $rut[0])->first();
     }
 
     /**

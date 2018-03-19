@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Provider;
 use App\Company;
+use App\Instance;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin/dashboard');
+        $providers = Provider::count();
+        $companies = Company::count();
+        $cases = Instance::count();
+        return view('admin/dashboard')->with(compact('providers', 'companies', 'cases'));
     }
 
     public function showProviders()

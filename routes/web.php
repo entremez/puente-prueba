@@ -11,18 +11,23 @@
 |
 */
 
-Route::get('/', 'HomeController@welcome' );
+Route::get('/', 'HomeController@welcome' )->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/home', 'Company\CompanyController@index')->middleware('auth','company');;
 
+
+//RUTAS ADMINISTRADORES
 Route::get('/admin/dashboard', 'Admin\AdminController@index')->middleware('auth','admin')->name('dashboard');
 Route::get('/admin/dashboard/providers', 'Admin\AdminController@showProviders')->middleware('auth','admin')->name('providers');
 Route::get('/admin/dashboard/companies', 'Admin\AdminController@showCompanies')->middleware('auth','admin')->name('companies');
+Route::get('/admin/dashboard/providers/{provider}/edit', 'Admin\Provider\AdminProviderController@edit')->middleware('auth','admin')->name('edit-provider');
 
 //RUTAS PROVEEDORES
-
+Route::get('/provider/dashboard','Provider\ProviderController@index')->middleware('auth','provider')->name('provider-dashboard');
+Route::post('/provider/dashboard','Provider\ProviderController@edit')->middleware('auth','provider');
 /*Route::get('/provider/login', 'Provider\LoginController@showLoginForm');
 Route::post('/provider/login', 'Provider\LoginController@login');
 Route::post('/provider/logout', 'Provider\LoginController@logout');*/

@@ -40,6 +40,11 @@ class User extends Authenticatable
                 $object = $this->hasOne('App\Company', 'id', 'type_id');
                 break;
         }
-        return $object->get()->first()->name;
+        return $object->get()->first();
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->name()->name;
     }
 }

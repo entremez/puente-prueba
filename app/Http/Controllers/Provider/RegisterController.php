@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
-use App\Rules\ValidaRut;
+use App\Rules\RutValidate;
+use App\Rules\RutProviderUnique;
 use Freshwork\ChileanBundle\Rut;
 
 class RegisterController extends Controller
@@ -60,8 +61,7 @@ class RegisterController extends Controller
             'name' => 'required|string|min:6',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'rut' => 'required',
-            'rut' => new ValidaRut(),
+            'rut' => ['required',new RutValidate(),new RutProviderUnique()]
         ]);
     }
 

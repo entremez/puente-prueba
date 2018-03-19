@@ -13,7 +13,7 @@
                   <th scope="col">Rut</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Dirección</th>
-                  <th scope="col">Estado</th>
+                  <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -24,7 +24,8 @@
                   <td>{{ $company->name }}</td>
                   <td>{{ $company->address }}</td>
                   <td>
-                    <a href="#" class="badge badge-success">Success</a>
+                    <span class="badge badge-success">&nbsp</span>
+                    <span data-feather="user"></span>
                 </td>
                 </tr>
                 @endforeach
