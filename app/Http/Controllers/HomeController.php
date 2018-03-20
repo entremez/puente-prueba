@@ -43,8 +43,9 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $cases = Instance::inRandomOrder()->paginate(6);
-        return view('welcome')->with(compact('cases'));
+/*        $cases = Instance::inRandomOrder()->paginate(6);
+        ->with(compact('cases'))*/
+        return view('welcome');
     }
 
 }
