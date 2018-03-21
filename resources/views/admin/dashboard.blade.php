@@ -1,90 +1,42 @@
-@extends('layouts.app-admin')
+@extends('layouts.app')
 @section('dashboard', 'active')
 
 @section('content')
 
-
-<div class="hola" style="background-color: #f4f7fa">
-    <div class="row text-center py-3">
-        <div class="col-md-4 ">
-            <span data-feather="user"></span>
-            <p class="card-text"><small>Compañias</small></p>
-            <p class="h2"> {{ $companies }}</p>
-        </div>
-        <div class="col-md-4">
-            <span data-feather="users"></span>
-            <p class="card-text"><small>Proveedores</small></p>
-            <p class="h2" >{{ $providers }}</p>
-        </div>
-        <div class="col-md-4">
-            <span data-feather="users"></span>
-            <p class="card-text">Casos</p>
-             <p class="h2" >{{ $cases }}</p>
-        </div>
-    </div>
-</div>
-<div class="container">
-        <br>
+<br><br><br>
+<div class="row py-3 pl-0" style="background-color: #D9CBCB">
+    <div class="col-md-4">
         <div class="row">
-            <div class="col-md-3 ">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div class="col-md-6 text-right pr-0 pt-4">
+                <i class="material-icons mr-3">supervisor_account</i><br>
+                <small>Empresas</small>
             </div>
-            <div class="col-md-3 ">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div class="col-md-6 pl-1">
+                <h1>{{ $companies }}</h1>
             </div>
-            <div class="col-md-6 ">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
+        </div>
     </div>
-</div>
-
-<div class="container fluid" style="background-color: #f4f7fa">
-        <div class="row py-3">
-            <div class="col-md-3 ">
-                <div class="card p-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-6 text-right pr-0 pt-4">
+                <i class="material-icons mr-4">person</i><br>
+                <small>Proveedores</small>
             </div>
-            <div class="col-md-3 ">
-                <div class="card p-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
+            <div class="col-md-6 pl-1">
+                <h1>{{ $providers }}</h1>
             </div>
-            <div class="col-md-6 ">
-                <div class="card p-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-6 text-right pr-0 pt-4">
+                <i class="material-icons mr-2">attach_file</i><br>
+                <small>Casos</small>
             </div>
+            <div class="col-md-6 pl-1">
+                <h1>{{ $cases }}</h1>
+            </div>
+        </div>
     </div>
 </div>
 

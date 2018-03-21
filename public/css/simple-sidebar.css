@@ -119,4 +119,9 @@ body {
     position: relative;
     margin-right: 0;
   }
+
+  .active{
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF!important;
+  }
 }

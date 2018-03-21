@@ -19,6 +19,7 @@ class CompanyController extends Controller
           ->width(0);
         $user = auth()->user();
         $data = $user->name();
-        return view('company.dashboard')->with(compact('user', 'data', 'chart'));
+        $dashboard = "company-dashboard";
+        return view('company.dashboard')->with(compact('user', 'data', 'chart', 'dashboard'));
     }
 }

@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $case->id }}|{{ $case->name }}</h5>
                         <p class="card-text">{{ $case->description }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary text-center">Ver caso</a>
                     </div>
 
                 </div>

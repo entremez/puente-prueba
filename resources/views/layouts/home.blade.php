@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}" onclick="scrollToDownload()">
+                        <a class="nav-link" href="{{ route($dashboard) }}" onclick="scrollToDownload()">
                             <i class="material-icons">person</i> {{ auth()->user()->name }}
                         </a>
                     </li>
@@ -103,23 +103,8 @@
             <nav class="pull-left">
                 <ul>
                     <li>
-                        <a href="https://www.creative-tim.com">
-                            Creative Tim
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://presentation.creative-tim.com">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://blog.creative-tim.com">
-                            Blog
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.creative-tim.com/license">
-                            Licenses
+                        <a href="{{ route('provider-register') }}">
+                            ¿Prestas servicios de diseño? Regístrate!
                         </a>
                     </li>
                 </ul>

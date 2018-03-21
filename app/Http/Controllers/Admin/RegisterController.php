@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -51,7 +52,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator($data)
     {
         return Validator::make($data, [
             'name' => 'required|string|min:4|unique:admins',
@@ -66,16 +67,32 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
+        $messages = [
+            'name.required' => 'Debe ingresar el nombre.',
+            'address.required' => 'Debe ingresar la dirección',
+            'logo.required' => 'Debe adjuntar una imagen',
+            'logo.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
+            'phone.required' => 'Debe ingresar número de teléfono',
+            'description.required' => 'Debe ingresar una descripción',
+        ];
+        $rules = [
+            'name' => 'required|string|min:4|unique:admins',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ];
+        $this->validate($request, $rules);
         $admin = Admin::create([
-            'name' => $data['name'],
+            'name' => $request->input('name'),
         ]);
-        return User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'type' => "Admin",
+        User::create([
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'type' => 'Admin',
             'type_id' => $admin->id,
         ]);
+        return back()->withSuccess( 'Administrador agregado corretamente');
     }
+
 }

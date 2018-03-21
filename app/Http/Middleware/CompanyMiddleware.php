@@ -16,6 +16,10 @@ class CompanyMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (Auth::guest()) {
+            return redirect()->route('welcome');
+        }
+
         if(Auth::user()->type == "Company")
             return $next($request);
         return back();

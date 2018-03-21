@@ -15,7 +15,8 @@ class AdminController extends Controller
         $providers = Provider::count();
         $companies = Company::count();
         $cases = Instance::count();
-        return view('admin/dashboard')->with(compact('providers', 'companies', 'cases'));
+        $dashboard = "dashboard";
+        return view('admin/dashboard')->with(compact('providers', 'companies', 'cases', 'dashboard'));
     }
 
     public function showProviders()

@@ -7,47 +7,9 @@
 
 @section('content')
 
-<div id="wrapper" class="toggled">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Inicio</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <li>
-                    <hr style="color: #FFFFFF; size: 10; border-top: 1px solid">
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
-        <div id="page-content-wrapper" class="text-center" >
-            <br><br><br>
-                <h2>Inicia el viaje</h2>
+        <div id="page-content-wrapper" class="text-center pt-0" >
+                <h2 class="mt-0">Inicia el viaje</h2>
                 <span class="h7">Último viaje: 01/01/2001</span><br>
                 <div class="pt-3">
                     <button class="btn btn-primary btn-round">
@@ -69,7 +31,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
         {!! Charts::scripts() !!}
         {!! $chart->script() !!}

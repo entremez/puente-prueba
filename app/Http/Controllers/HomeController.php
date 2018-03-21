@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Instance;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,9 @@ class HomeController extends Controller
     public function welcome()
     {
         $cases = Instance::inRandomOrder()->paginate(6);
-        return view('welcome')->with(compact('cases'));
+        if(auth()->check())
+            $dashboard = auth()->user()->dashboard;
+        return view('welcome')->with(compact('cases', 'dashboard'));
     }
 
 }

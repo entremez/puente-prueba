@@ -1,12 +1,12 @@
-@extends('layouts.app-admin')
-@section('provider', 'active')
+@extends('layouts.app')
+@section('providers', 'active')
 
 @section('content')
-<div class="container">
-    <div class="row">
+
+    <div class="row" >
         <div class="col-md-12">
             <h2>Proveedores</h2>
-            <table class="table">
+            <table id="table_id" class="display">
               <thead class="thead-dark">
                 <tr>
                   <th  scope="col">#</th>
@@ -30,12 +30,12 @@
                   <td>{{ $provider->web }}</td>
                   <td>{{ $provider->description }}</td>
                   <td>
-                    <i class="fa {{ $provider->approved ? 'fa-eye' : 'fa-eye-slash'}} h4"></i>
+                    <i class="material-icons">{{ $provider->approved ? 'visibility' : 'visibility_off'}}</i>
                     <a  data-toggle="modal" data-target="#{{ $provider->id }}">
-                      <i class="fa fa-info-circle h4" style="color:yellow"></i>
+                      <i class="material-icons" style="color:yellow">info_outline</i>
                     </a>
-                    <i class="fa fa-pencil-alt h4" style="color:green"></i>
-                    <i class="fa fa-trash h4" style="color:red"></i>
+                    <i class="material-icons" style="color:green">mode_edit</i>
+                    <i class="material-icons" style="color:red">delete</i>
                   </td>
                 </tr>
                 <div class="modal fade" id="{{ $provider->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,6 +66,4 @@
     </div>
 
 
-
-</div>
 @endsection

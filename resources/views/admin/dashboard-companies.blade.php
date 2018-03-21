@@ -1,12 +1,12 @@
-@extends('layouts.app-admin')
-@section('company', 'active')
+@extends('layouts.app')
+@section('companies', 'active')
 
 @section('content')
-<div class="container">
+
     <div class="row">
         <div class="col-md-12">
             <h2>Empresas</h2>
-            <table class="table">
+            <table id="table_id" class="display">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>

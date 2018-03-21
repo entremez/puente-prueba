@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Admins</title>
+    <title>@yield('title','Puente')</title>
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -21,7 +21,7 @@
     <nav class="navbar navbar-color-on-scroll  fixed-top  navbar-expand-lg " color-on-scroll="-1" id="sectionsNav">
         <div class="container">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="../index.html">{{ config('app.name', 'AP') }}</a>
+                <a class="navbar-brand" href="{{ route('welcome') }}">{{ config('app.name', 'AP') }}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     <span class="navbar-toggler-icon"></span>
@@ -40,12 +40,14 @@
                             <i class="material-icons">menu</i> Menú
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
-                            <a href="../index.html" class="dropdown-item">
-                                <i class="material-icons">layers</i> All Components
+                            <a href="{{ route('logout') }}" class="dropdown-item"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="material-icons">close</i> Cerrar sesión
                             </a>
-                            <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
-                                <i class="material-icons">content_paste</i> Documentation
-                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -108,6 +110,13 @@
     <script src="{{ asset('js/mk/plugins/nouislider.min.js') }}"></script>
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="{{ asset('js/mk/material-kit.js?v=2.0.2') }}"></script>
+
+<script type="application/javascript">
+jQuery('input[type=file]').change(function(e){
+ var filename =  e.currentTarget.files[0].name;
+ $("#file").text(filename);
+});
+</script>
 
   </body>
 </html>

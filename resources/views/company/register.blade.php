@@ -2,16 +2,13 @@
 
 @section('content')
 <div class="container">
-<div class="col-md-6 offset-md-3">
-<br><br>
+    <div class="col-md-6 offset-md-3">
+    <br><br>
         <h2>Registro empresas</h2>
         <form method="POST" action="{{ url('register') }}">
             {{ csrf_field() }}
-
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="control-label">Razón Social</label>
-
-
                     <input type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                     @if ($errors->has('name'))
@@ -109,33 +106,26 @@
 
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <label for="password" class="control-label">Contraseña</label>
-                    <input id="password" type="password" class="form-control" name="password" required>
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-
+                <input id="password" type="password" class="form-control" name="password" required>
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
             </div>
 
             <div class="form-group">
                 <label for="password-confirm" class="control-label">Repetir contraseña</label>
-
-
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
             </div>
 
             <div class="form-group">
-
                     <button type="submit" class="btn btn-primary">
                         Registrarse
                     </button>
 
             </div>
         </form>
-    </div>
     </div>
 </div>
 <br>

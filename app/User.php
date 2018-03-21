@@ -47,4 +47,19 @@ class User extends Authenticatable
     {
         return $this->name()->name;
     }
+
+    public function getDashboardAttribute()
+    {
+        switch(auth()->user()->type){
+                case "Admin":
+                    return 'admin/dashboard';
+                    break;
+                case "Provider":
+                    return 'provider/dashboard';
+                    break;
+                case "Company":
+                    return 'company/dashboard';
+                    break;
+        }
+    }
 }

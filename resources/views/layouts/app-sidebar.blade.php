@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Dashboard Admins</title>
+    <title>@yield('title', 'PDE')</title>
 
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -21,12 +22,11 @@
             box-shadow: none!important;
         }
         .espacio {
-            margin-top: 50px!important;
+                margin-top: 50px!important;
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('css/simple-sidebar.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 
+    @yield('css')
   </head>
 
   <body class="landing-page ">
@@ -44,7 +44,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route(auth()->user()->dashboard) }}" onclick="scrollToDownload()">
+                        <a class="nav-link" href="{{ route('login') }}" onclick="scrollToDownload()">
                             <i class="material-icons">person</i> {{ auth()->user()->name }}
                         </a>
                     </li>
@@ -86,107 +86,48 @@
             @endif
         </div>
     </nav>
-
-    @if(auth()->check())
     <div class="main main-raised">
         <br>
         <div class="container">
-            <div id="wrapper" class="toggled">
-                <!-- Sidebar -->
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <li class="sidebar-brand">
-                            <a href="#">
-
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin/dashboard') }}" class="@yield('dashboard')" >Inicio</a>
-                        </li>
-
-                        @if(auth()->user()->type == "Admin")
-                            <li>
-                                <a href="{{ route('companies') }}" class="@yield('companies')">Empresas</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('providers') }}" class="@yield('providers')">Proveedores</a>
-                            </li>
-                            <li>
-                                <a href="#">Encuestas</a>
-                            </li>
-                            <li>
-                                <a href="#">Informes</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin-register') }}">Agregar administrador</a>
-                            </li>
-                            <li>
-                                <hr style="color: #FFFFFF; size: 10; border-top: 1px solid">
-                            </li>
-                        @elseif(auth()->user()->type == "Provider")
-                            <li>
-                                <a href="" class="@yield('cases')">Administrar casos</a>
-                            </li>
-                            <li>
-                                <a href="" class="@yield('add-cases')">Agregar caso</a>
-                            </li>
-                        @elseif(auth()->user()->type == "Company")
-                        @endif
-                    </ul>
-                </div>
-                <!-- /#sidebar-wrapper -->
-
-                <!-- Page Content -->
-                <br><br><br><br>
-                <button class="btn btn-primary btn-fab btn-round" id="menu-toggle">
-                    <i id="menu-toggl" class="material-icons">arrow_back</i>
-                </button>
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
         <br>
     </div>
-    @else
-        <br><br><br>
-        @yield('content')
-        <footer class="footer ">
-            <div class="container">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="https://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://presentation.creative-tim.com">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.creative-tim.com/license">
-                                Licenses
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright pull-right">
-                    &copy;
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>, made with <i class="material-icons">favorite</i> by
-                    <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-                </div>
+<!--     <footer class="footer ">
+        <div class="container">
+            <nav class="pull-left">
+                <ul>
+                    <li>
+                        <a href="https://www.creative-tim.com">
+                            Creative Tim
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://presentation.creative-tim.com">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://blog.creative-tim.com">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.creative-tim.com/license">
+                            Licenses
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright pull-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, made with <i class="material-icons">favorite</i> by
+                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
             </div>
-        </footer>
-    @endif
-
-
+        </div>
+    </footer> -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -202,24 +143,6 @@
     <script src="{{ asset('js/mk/plugins/nouislider.min.js') }}"></script>
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="{{ asset('js/mk/material-kit.js?v=2.0.2') }}"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <script>
-    $(document).ready( function () {
-    $('#table_id').DataTable();
-    } );
-
-
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if($("#menu-toggl").text() == 'arrow_back'){
-            $("#menu-toggl").text('arrow_forward');
-        }else{
-            $("#menu-toggl").text('arrow_back');
-        }
-    });
-
-    </script>
 
   </body>
 </html>

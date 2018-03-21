@@ -16,24 +16,43 @@ Route::get('/', 'HomeController@welcome' )->name('welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/home', 'Company\CompanyController@index')->middleware('auth','company');;
+Route::get('/home', 'Company\CompanyController@index');
+Route::get('/home', 'Admin\AdminController@index');
+Route::get('/home', 'Provider\ProviderController@index');
 
 
 //RUTAS ADMINISTRADORES
-Route::get('/admin/dashboard', 'Admin\AdminController@index')->middleware('auth','admin')->name('dashboard');
-Route::get('/admin/dashboard/providers', 'Admin\AdminController@showProviders')->middleware('auth','admin')->name('providers');
-Route::get('/admin/dashboard/companies', 'Admin\AdminController@showCompanies')->middleware('auth','admin')->name('companies');
-Route::get('/admin/dashboard/providers/{provider}/edit', 'Admin\Provider\AdminProviderController@edit')->middleware('auth','admin')->name('edit-provider');
+//Route::middleware(['auth','admin'])->prefix('admin')->group(function()
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function()
+{
+    Route::get('/dashboard', 'Admin\AdminController@index')->name('admin/dashboard');
+    Route::get('/dashboard/providers', 'Admin\AdminController@showProviders')->name('providers');
+    Route::get('/dashboard/companies', 'Admin\AdminController@showCompanies')->name('companies');
+    Route::get('/dashboard/providers/{provider}/edit', 'Admin\Provider\AdminProviderController@edit')->name('edit-provider');
 
+    Route::get('/register', 'Admin\RegisterController@showRegistrationForm')->name('admin-register');
+    Route::post('/register', 'Admin\RegisterController@create');
+});
 //RUTAS PROVEEDORES
-Route::get('/provider/dashboard','Provider\ProviderController@index')->middleware('auth','provider')->name('provider-dashboard');
-Route::post('/provider/dashboard','Provider\ProviderController@edit')->middleware('auth','provider');
+//Route::middleware(['auth','provider'])->prefix('provider')->group(function()
+Route::group(['prefix' => 'provider', 'middleware' => ['auth','provider']], function()
+{
+    Route::get('/dashboard','Provider\ProviderController@index')->name('provider/dashboard');
+    Route::post('/dashboard','Provider\ProviderController@edit');
+});
+// RUTAS COMPAÑIAS Route::middleware(['auth','company'])->prefix('company')->group(function()
+Route::group(['prefix' => 'company', 'middleware' => ['auth','company']], function()
+{
+    Route::get('/dashboard', 'Company\CompanyController@index')->name('company/dashboard');
+});
+
+
 /*Route::get('/provider/login', 'Provider\LoginController@showLoginForm');
 Route::post('/provider/login', 'Provider\LoginController@login');
 Route::post('/provider/logout', 'Provider\LoginController@logout');*/
 
 // Registration Routes...
-Route::get('/provider/register', 'Provider\RegisterController@showRegistrationForm');
+Route::get('/provider/register', 'Provider\RegisterController@showRegistrationForm')->name('provider-register');
 Route::post('/provider/register', 'Provider\RegisterController@register');
 
 // Password Reset Routes...
@@ -41,6 +60,3 @@ Route::post('/provider/register', 'Provider\RegisterController@register');
 Route::post('/provider/password/email', 'Provider\ForgotPasswordController@sendResetLinkEmail');
 Route::get('/provider/password/reset/{token}', 'Provider\ResetPasswordController@showResetForm');
 Route::post('/provider/password/reset', 'Provider\ResetPasswordController@reset');*/
-
-Route::get('/admin/register', 'Admin\RegisterController@showRegistrationForm');
-Route::post('/admin/register', 'Admin\RegisterController@register');
