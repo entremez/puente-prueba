@@ -23,4 +23,15 @@ class Provider extends Model
             return $this->logo;
         return '/providers/logos/'.$this->logo;
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'type_id', 'id');
+    }
+
+    public function getEmailAttribute()
+    {
+        $users = User::where('type_id',$this->id)->where('type', 'Provider')->get()->first();
+        return $users->email;
+    }
 }

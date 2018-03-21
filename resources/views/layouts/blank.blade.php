@@ -28,11 +28,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
+            @if(auth()->check())
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
-                            <i class="material-icons">perm_identity</i> {{ $user->email }}
+                            <i class="material-icons">perm_identity</i> {{ auth()->user()->email }}
                         </a>
                     </li>
                     <li class="dropdown nav-item">
@@ -52,6 +53,22 @@
                     </li>
                 </ul>
             </div>
+            @else
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}" onclick="scrollToDownload()">
+                            <i class="material-icons">person_outline</i> Inicia sesión
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}" onclick="scrollToDownload()">
+                            <i class="material-icons">person_add</i> Regístrate
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            @endif
         </div>
     </nav>
     <div class="main main-raised">
