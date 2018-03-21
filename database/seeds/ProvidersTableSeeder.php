@@ -16,6 +16,7 @@ class ProvidersTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(App\Service::class, 15)->create();
         $providers = factory(Provider::class, 10)->create();
         $providers->each(function($provider){
                 $user = factory(User::class)->create();
