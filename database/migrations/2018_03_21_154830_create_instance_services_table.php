@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInstancesTable extends Migration
+class CreateInstanceServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateInstancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('instances', function (Blueprint $table) {
+        Schema::create('instance_services', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('provider_id')->unsigned();
-            $table->string('name');
-            $table->string('description');
-            $table->string('long_description');
-            $table->string('default_image');
+            $table->integer('instance_id')->unsigned();
+            $table->foreign('instance_id')->references('id')->on('instances');
 
+            $table->integer('service_id')->unsigned();
+            $table->foreign('service_id')->references('id')->on('services');
 
             $table->timestamps();
         });
@@ -34,6 +33,6 @@ class CreateInstancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instances');
+        Schema::dropIfExists('instance_services');
     }
 }

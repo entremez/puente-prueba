@@ -34,7 +34,14 @@
                 <div class="card">
                     <img class="card-img-top" src="{{ $case->default_image }}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $case->id }}|{{ $case->name }}</h5>
+                        @foreach($case->services as $services)
+                        <span class="badge badge-success">
+                            @foreach($services->services as $service)
+                                {{ $service->name }}
+                            @endforeach
+                        </span>
+                        @endforeach
+                        <h5 class="card-title">{{ ucfirst($case->name) }}</h5>
                         <p class="card-text">{{ $case->description }}</p>
                         <a href="#" class="btn btn-primary text-center">Ver caso</a>
                     </div>

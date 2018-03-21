@@ -14,4 +14,8 @@ class Instance extends Model
     public function images(){
         return $this->hasMany('App\CaseImage');
     }
+
+    public function services(){
+        return $this->hasMany('App\InstanceService');
+    }
 }
