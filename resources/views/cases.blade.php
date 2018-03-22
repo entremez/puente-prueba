@@ -61,7 +61,7 @@
         <p>{{ $instance->long_description }}</p>
         @foreach($instance->services as $service)
             @foreach($service->services as $tag)
-                <span class="badge badge-success">{{ $tag->name }}</span>
+                <a href="{{ route('service',$tag) }}"><span class="badge badge-success">{{ $tag->name }}</span></a>
             @endforeach
         @endforeach
     </div>

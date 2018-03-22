@@ -10,8 +10,8 @@ class Service extends Model
         'name', 'description'
     ];
 
-    public function cases()
+    public function instances()
     {
-        return $this->hasMany('App\Instance');
+        return $this->hasMany('App\InstanceService');
     }
 }

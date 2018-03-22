@@ -35,11 +35,13 @@
                     <img class="card-img-top" src="{{ $case->default_image }}" alt="Card image cap">
                     <div class="card-body">
                         @foreach($case->services as $services)
-                            <span class="badge badge-success">
                                 @foreach($services->services as $service)
-                                    {{ $service->name }}
+                                <a href="{{ route('service',$service) }}">
+                                    <span class="badge badge-success">
+                                        {{ $service->name }}
+                                    </span>
+                                </a>
                                 @endforeach
-                            </span>
                         @endforeach
                         <h5 class="card-title">{{ ucfirst($case->name) }}</h5>
                         <p class="card-text">{{ $case->description }}</p>

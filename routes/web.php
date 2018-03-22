@@ -2,6 +2,7 @@
 
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 Route::get('/case/{instance}', 'InstanceController@show')->name('case');
+Route::get('/tag/{service}', 'ServiceController@show')->name('service');
 
 Auth::routes();
 

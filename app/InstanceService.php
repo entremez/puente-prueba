@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class InstanceService extends Model
 {
     public function instances(){
-        return $this->hasMany('App\Instace');
+        return $this->hasMany('App\Instance', 'id', 'instance_id');
     }
 
     public function services(){
