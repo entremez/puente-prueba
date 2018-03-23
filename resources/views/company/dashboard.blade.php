@@ -22,7 +22,9 @@
                 <p>{{ $description }}</p>
             </div>
             <div class="col-md-6">
-                 {!! $chart->html() !!}
+{!! Charts::assets() !!}
+
+{!! $chart->render() !!}
             </div>
         </div>
     </div>
