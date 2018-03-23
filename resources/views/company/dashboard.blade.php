@@ -18,20 +18,19 @@
             </div>
         <div class="row pt-4">
             <div class="col-md-6">
+                 {!! $chart->html() !!}
+                 {!! Charts::scripts() !!}
+                 {!! $chart->script() !!}
+             </div>
+            <div class="col-md-6">
                 <h3>Nivel {{ $level }}</h3>
                 <p>{{ $description }}</p>
-            </div>
-            <div class="col-md-6">
-{!! Charts::assets() !!}
-
-{!! $chart->render() !!}
             </div>
         </div>
     </div>
 
 
-{!! Charts::scripts() !!}
-{!! $chart->script() !!}
+
 @else
     <h2 class="mt-0">Inicia el viaje</h2>
     <span class="h7">No tenemos nada que mostrarte aun, inicia el viaje y sigue tus resultados.</span><br>
