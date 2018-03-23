@@ -103,6 +103,9 @@
 .timeline .timeline-item:last-child:nth-child(even) {
   float: right;
 }
+.timeline .timeline-item:last-child:nth-child(odd) {
+  float: right;
+}
 .timeline .timeline-item:nth-child(even) .timeline-panel {
   float: right;
   left: 16px;
