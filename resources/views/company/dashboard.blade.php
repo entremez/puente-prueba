@@ -2,8 +2,7 @@
 @section('dashboard', 'active')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/simple-sidebar.css') }}">
-
-  {!! Charts::styles() !!}
+{!! Charts::styles() !!}
 @endsection
 
 @section('content')
@@ -19,14 +18,18 @@
             </div>
         <div class="row pt-4">
             <div class="col-md-6">
-                 {!! $chart->html() !!}
-            </div>
-            <div class="col-md-6">
                 <h3>Nivel {{ $level }}</h3>
                 <p>{{ $description }}</p>
             </div>
+            <div class="col-md-6">
+                 {!! $chart->html() !!}
+            </div>
         </div>
     </div>
+
+
+{!! Charts::scripts() !!}
+{!! $chart->script() !!}
 @else
     <h2 class="mt-0">Inicia el viaje</h2>
     <span class="h7">No tenemos nada que mostrarte aun, inicia el viaje y sigue tus resultados.</span><br>
@@ -36,7 +39,4 @@
         </button>
     </div>
 @endif
-
-{!! Charts::scripts() !!}
-{!! $chart->script() !!}
 @endsection
