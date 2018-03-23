@@ -6,6 +6,8 @@ use App\User;
 use App\CaseImage;
 use App\Instance;
 use App\InstanceService;
+use App\Service;
+use App\ProviderService;
 
 class ProvidersTableSeeder extends Seeder
 {
@@ -25,14 +27,22 @@ class ProvidersTableSeeder extends Seeder
                 $user->save();
                 $cases = factory(Instance::class, 10)->make();
                 $provider->cases()->saveMany($cases);
+                $services = Service::inRandomOrder()->get();
+                for ($i=0; $i < rand(3,6); $i++) {
+                    $provider_service = new ProviderService();
+                    $provider_service->service_id = $services[$i]->id;
+                    $provider_service->provider_id = $provider->id;
+                    $provider_service->save();
+                    $servicios[$i] = $provider_service->service_id;
+                }
 
-                $cases->each(function($case){
+                $cases->each(function($case) use ($servicios){
                         $images = factory(CaseImage::class, 3)->make();
                         $case->images()->saveMany($images);
                         for ($i=0; $i < rand(1,3); $i++) {
                             $instance_service = new InstanceService();
                             $instance_service->instance_id = $case->id;
-                            $instance_service->service_id = rand(1,15);
+                            $instance_service->service_id = $servicios[$i];
                             $instance_service->save();
                         }
                     });

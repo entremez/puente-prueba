@@ -34,4 +34,9 @@ class Provider extends Model
         $users = User::where('type_id',$this->id)->where('type', 'Provider')->get()->first();
         return $users->email;
     }
+
+    public function services()
+    {
+        return $this->hasMany('App\ProviderService', 'provider_id' , 'id');
+    }
 }

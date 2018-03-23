@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('dashboard', 'active')
 
+@section('css')
+  {!! Charts::styles() !!}
+@endsection
+
 @section('content')
 
 <br><br><br>
@@ -39,6 +43,10 @@
         </div>
     </div>
 </div>
-
+<div class="row">
+{!! $chart->html() !!}
+</div>
+{!! Charts::scripts() !!}
+{!! $chart->script() !!}
 
 @endsection

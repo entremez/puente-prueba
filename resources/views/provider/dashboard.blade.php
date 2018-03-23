@@ -29,6 +29,16 @@
                     <div class="col-md-2"><i class="material-icons">location_on</i></div>
                     <div class="col-md-10"><p>{{ $data->address }}</p></div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2"><i class="material-icons">settings</i></div>
+                    <div class="col-md-10">
+                    @foreach($services as $service)
+                        <span class="badge badge-success">
+                            {{ $service->service()->get()->first()->name }}
+                        </span>
+                    @endforeach
+                    </div>
+                </div>
             </div>
     </div>
 </div>

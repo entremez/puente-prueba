@@ -3,6 +3,7 @@
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 Route::get('/case/{instance}', 'InstanceController@show')->name('case');
 Route::get('/tag/{service}', 'ServiceController@show')->name('service');
+Route::get('/provider/{provider}', 'ProviderController@show')->name('provider');
 
 Auth::routes();
 
@@ -39,4 +40,5 @@ Route::post('/provider/register', 'Provider\RegisterController@register');
 Route::group(['prefix' => 'company', 'middleware' => ['auth','company']], function()
 {
     Route::get('/dashboard', 'Company\CompanyController@index')->name('company/dashboard');
+    Route::get('/timeline', 'Company\CompanyController@timeline')->name('timeline');
 });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Service;
+use App\ProviderService;
 
 class ProviderController extends Controller
 {
@@ -13,9 +15,11 @@ class ProviderController extends Controller
         $user = auth()->user();
         $data = $user->name();
         $dashboard = "provider-dashboard";
+        $services = Service::get();
         if (empty($data->logo) OR empty($data->description))
-            return view('provider.config-dashboard')->with(compact('data','user', 'dashboard'));
-        return view('provider.dashboard')->with(compact('user', 'data', 'dashboard'));
+            return view('provider.config-dashboard')->with(compact('data','user', 'dashboard', 'services'));
+        $services = ProviderService::where('provider_id', '=',$data->id)->get();
+        return view('provider.dashboard')->with(compact('user', 'data', 'dashboard','services'));
     }
 
     public function edit(Request $request)
@@ -27,6 +31,7 @@ class ProviderController extends Controller
             'logo.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
             'phone.required' => 'Debe ingresar número de teléfono',
             'description.required' => 'Debe ingresar una descripción',
+            'service.required' => 'Debe seleccionar al menos un servicio',
         ];
         $rules = [
             'name' => 'required',
@@ -34,6 +39,7 @@ class ProviderController extends Controller
             'phone' => 'required',
             'logo' => 'required|image',
             'description' => 'required',
+            'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
         $file = $request->file('logo');
@@ -48,6 +54,14 @@ class ProviderController extends Controller
         $provider->phone = $request->input('phone');
         $provider->description = $request->input('description');
         $provider->save();
+
+        $services = $request->input('service');
+        for ($i=0; $i < count($services); $i++) {
+            $provider_service = new ProviderService();
+            $provider_service->provider_id = $provider->id;
+            $provider_service->service_id = $services[$i];
+            $provider_service->save();
+        }
 
         return redirect('provider/dashboard');
     }

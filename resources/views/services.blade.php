@@ -29,10 +29,10 @@
 <div class="row">
     @foreach($instances as $instance)
         @foreach($instance->instances as $instance)
-            <div class="col-md-4 ">
-                <div class="card">
-                    <img class="card-img-top" src="{{ $instance->default_image }}" alt="Card image cap">
-                    <div class="card-body">
+            <div class="col-md-4 parent" style="background-image:url({{ url($instance->default_image) }})">
+                <div class="card child" style="background: rgba(255, 255, 255, 0.47);" >
+                    <!-- <img class="card-img-top" alt="Card image cap"> -->
+                    <div class="card-body" style="background-color: #ffffff4d!important">
                         <h5 class="card-title">{{ ucfirst($instance->name) }}</h5>
                         <p class="card-text">{{ $instance->description }}</p>
                         <a href="{{ route('case', $instance->id) }}" class="btn btn-primary text-center">Ver caso</a>

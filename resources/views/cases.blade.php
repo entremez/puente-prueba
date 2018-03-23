@@ -36,9 +36,6 @@
                     <div class="carousel-item">
                         <img class="d-block w-100" src="{{ $image->image}}" alt="">
                         <div class="carousel-caption d-none d-md-block">
-                            <!-- <h4>
-                                <i class="material-icons">location_on</i> Yellowstone National Park, United States
-                            </h4> -->
                         </div>
                     </div>
                     @endforeach
@@ -68,13 +65,16 @@
 </div>
 <div class="row">
     <div class="col-md-8">
-        <i class="material-icons" style="font-size: 40px">email</i>
-        <h2>{{ $instance->provider->name }}</h2>
+        <h2 class="mt-2">{{ $instance->provider->name }}</h2>
         <p><i class="material-icons">location_on</i> {{ $instance->provider->address }}</p>
         <p><i class="material-icons">web</i> {{ $instance->provider->web }}</p>
         <p><i class="material-icons">mail</i> {{ $instance->provider->email }}</p>
         <p><i class="material-icons">description</i> {{ $instance->provider->description }}</p>
-
+        <p>
+            <a  href="{{ route('provider',$instance->provider->id) }}" class="btn btn-primary btn-round">
+                <i class="material-icons">add</i> Ver todos los proyectos realizados por la empresa {{ $instance->provider->name }}
+            </a>
+        </p>
     </div>
 </div>
 

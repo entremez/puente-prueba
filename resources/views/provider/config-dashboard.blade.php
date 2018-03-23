@@ -88,12 +88,31 @@ machete:
                 </label>
             </div>
         </div>
+        <ul>
 
-
+        </ul>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos de tus servicios</label>
             <textarea type="textarea" name="description" class="form-control" rows="4" id="exampleMessage">{{ old('description', $data->description) }}</textarea>
         </div>
+
+            <h4>Selecciona los servicios que prestas</h4>
+        <div class="row">
+
+            @foreach($services as $service)
+            <div class="col-md-3 col-sm-4">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
+                        <span class="form-check-sign">
+                            <span class="check"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
                 <button type="submit" class="btn btn-primary btn-raised">

@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{{ asset('css/mk/material-kit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
     <style type="text/css">
     body{
         background-color: #FFFFFF;
@@ -101,7 +102,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin/dashboard') }}" class="@yield('dashboard')" >Inicio</a>
+                            <a href="{{ route(auth()->user()->dashboard) }}" class="@yield('dashboard')" >Inicio</a>
                         </li>
 
                         @if(auth()->user()->type == "Admin")
@@ -131,6 +132,9 @@
                                 <a href="" class="@yield('add-cases')">Agregar caso</a>
                             </li>
                         @elseif(auth()->user()->type == "Company")
+                            <li>
+                                <a href="{{ route('timeline') }}" class="@yield('timeline')">Ver progreso</a>
+                            </li>
                         @endif
                     </ul>
                 </div>
