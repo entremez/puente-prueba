@@ -54,7 +54,7 @@
     <div class="col-md-7">
         <h1>{{ strtoupper($instance->name) }}</h1>
         <p>{{ $instance->description }}</p>
-        <h3>Nombre empresa</h3>
+        <h3>{{ $instance->company_name }}</h3>
         <p>{{ $instance->long_description }}</p>
         @foreach($instance->services as $service)
             @foreach($service->services as $tag)

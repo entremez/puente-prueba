@@ -18,6 +18,7 @@ class CreateInstancesTable extends Migration
 
             $table->integer('provider_id')->unsigned();
             $table->string('name');
+            $table->string('company_name');
             $table->string('description');
             $table->string('long_description');
             $table->string('default_image');

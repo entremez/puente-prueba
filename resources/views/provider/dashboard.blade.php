@@ -19,7 +19,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2"><i class="material-icons">phone</i></div>
-                    <div class="col-md-10"><p>{{ $user->phone }}</p></div>
+                    <div class="col-md-10"><p>{{ $phone }}</p></div>
                 </div>
                 <div class="row">
                     <div class="col-md-2"><i class="material-icons">fingerprint</i></div>

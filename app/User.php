@@ -55,10 +55,25 @@ class User extends Authenticatable
                     return 'admin/dashboard';
                     break;
                 case "Provider":
-                    return 'provider/dashboard';
+                    return 'providers/dashboard';
                     break;
                 case "Company":
                     return 'company/dashboard';
+                    break;
+        }
+    }
+
+    public function getRouteNameAttribute()
+    {
+        switch(auth()->user()->type){
+                case "Admin":
+                    return 'admin.dashboard';
+                    break;
+                case "Provider":
+                    return 'provider.dashboard';
+                    break;
+                case "Company":
+                    return 'company.dashboard';
                     break;
         }
     }

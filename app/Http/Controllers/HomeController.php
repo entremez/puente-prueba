@@ -9,7 +9,6 @@ use App\User;
 
 class HomeController extends Controller
 {
-    private $cases;
     /**
      * Create a new controller instance.
      *
@@ -29,13 +28,13 @@ class HomeController extends Controller
         if(auth()->check()){
             switch(auth()->user()->type){
                 case "Admin":
-                    return redirect()->action('Admin\AdminController@index');
+                    return redirect()->route('admin.dashboard');
                     break;
                 case "Provider":
-                    return redirect()->action('Provider\ProviderController@index');
+                    return redirect()->route('provider.dashboard');
                     break;
                 case "Company":
-                    return redirect()->action('Company\CompanyController@index');
+                    return redirect()->route('company.dashboard');
                     break;
             }
         }
@@ -46,7 +45,7 @@ class HomeController extends Controller
     {
         $cases = Instance::inRandomOrder()->paginate(6);
         if(auth()->check())
-            $dashboard = auth()->user()->dashboard;
+            $dashboard = auth()->user()->route_name;
         return view('welcome')->with(compact('cases', 'dashboard'));
     }
 

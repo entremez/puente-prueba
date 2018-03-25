@@ -59,6 +59,11 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <a href="{{ route('providers-list') }}" class="nav-link">
+                            <i class="material-icons">list</i> Listado proveedores
+                        <div class="ripple-container"></div></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}" onclick="scrollToDownload()">
                             <i class="material-icons">person_outline</i> Inicia sesión
                         </a>
@@ -73,7 +78,7 @@
             @endif
         </div>
     </nav>
-    <div class="page-header header-filter" data-parallax="true" style=" background-image: url('https://qph.ec.quoracdn.net/main-qimg-e3bd53f77bd66371149df4f512e391d0-c'); ">
+    <div class="page-header header-filter" data-parallax="true" style=" background-image: url('https://www.walldevil.com/wallpapers/a50/nature-wallpaper-forest-forests-bridges-bridge-background-australia-desktop.jpg'); background-size: cover; ">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">

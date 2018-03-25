@@ -7,7 +7,7 @@ $factory->define(Company::class, function (Faker $faker) {
     return [
         'rut' => $faker->numberBetween($min = 20000000, $max = 30000000),
         'dv_rut' => $faker->randomDigit,
-        'name' => $faker->word,
+        'name' => $faker->company.' '.$faker->companySuffix,
         'address' => $faker->address,
         'web' => $faker->domainName
     ];

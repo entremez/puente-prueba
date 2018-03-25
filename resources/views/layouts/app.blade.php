@@ -45,7 +45,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route(auth()->user()->dashboard) }}" onclick="scrollToDownload()">
+                        <a class="nav-link" href="{{ route(auth()->user()->route_name) }}" onclick="scrollToDownload()">
                             <i class="material-icons">person</i> {{ auth()->user()->name }}
                         </a>
                     </li>
@@ -62,8 +62,8 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
-                            <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
-                                <i class="material-icons">content_paste</i> Documentation
+                            <a href="#" class="dropdown-item">
+                                <i class="material-icons">content_paste</i>
                             </a>
                         </div>
                     </li>
@@ -102,7 +102,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route(auth()->user()->dashboard) }}" class="@yield('dashboard')" >Inicio</a>
+                            <a href="{{ route(auth()->user()->route_name) }}" class="@yield('dashboard')" >Inicio</a>
                         </li>
 
                         @if(auth()->user()->type == "Admin")

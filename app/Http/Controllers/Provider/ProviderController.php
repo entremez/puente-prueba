@@ -14,12 +14,12 @@ class ProviderController extends Controller
     {
         $user = auth()->user();
         $data = $user->name();
-        $dashboard = "provider-dashboard";
+        $phone = $data->phone;
         $services = Service::get();
         if (empty($data->logo) OR empty($data->description))
-            return view('provider.config-dashboard')->with(compact('data','user', 'dashboard', 'services'));
+            return view('provider.config-dashboard')->with(compact('data','user', 'services'));
         $services = ProviderService::where('provider_id', '=',$data->id)->get();
-        return view('provider.dashboard')->with(compact('user', 'data', 'dashboard','services'));
+        return view('provider.dashboard')->with(compact('user', 'data','services', 'phone'));
     }
 
     public function edit(Request $request)
