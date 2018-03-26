@@ -1,15 +1,6 @@
 @extends('layouts.blank')
 @section('css')
-    <style type="text/css">
-        .main-raised {
-            margin: 0!important;
-            border-radius: 0!important;
-            box-shadow: none!important;
-        }
-        .espacio {
-                margin-top: 80px!important;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
 @endsection
 
 @section('content')

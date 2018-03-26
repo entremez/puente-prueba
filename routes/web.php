@@ -3,8 +3,9 @@
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 Route::get('/case/{instance}', 'InstanceController@show')->name('case');
 Route::get('/tag/{service}', 'ServiceController@show')->name('service');
-Route::get('/provider/{provider}', 'ProviderController@detail')->name('provider');
+Route::get('/providers/{provider}', 'ProviderController@detail')->name('provider');
 Route::get('/provider', 'ProviderController@show')->name('providers-list');
+Route::post('/provider', 'ProviderController@filtered')->name('providers-list');
 
 Auth::routes();
 
@@ -24,9 +25,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function()
 
 //RUTAS PROVEEDORES
 
-Route::group(['prefix' => 'providers', 'middleware' => ['auth','provider']], function()
+Route::group(['prefix' => 'provider', 'middleware' => ['auth','provider']], function()
 {
     Route::get('/dashboard', 'Provider\ProviderController@index')->name('provider.dashboard');
+    Route::resource('cases', 'Provider\CaseController');
+
 });
 Route::get('/provider/register', 'Provider\RegisterController@showRegistrationForm')->name('provider-register');
 Route::post('/provider/register', 'Provider\RegisterController@register');

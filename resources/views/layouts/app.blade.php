@@ -12,21 +12,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{{ asset('css/mk/material-kit.css') }}">
     <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
-    <style type="text/css">
-    body{
-        background-color: #FFFFFF;
-    }
-        .main-raised {
-            margin: 0!important;
-            border-radius: 0!important;
-            box-shadow: none!important;
-        }
-        .espacio {
-            margin-top: 50px!important;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/timeline.css') }}">
     <link rel="stylesheet" href="{{ asset('css/simple-sidebar.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
 
   </head>
 
@@ -131,9 +120,23 @@
                             <li>
                                 <a href="" class="@yield('add-cases')">Agregar caso</a>
                             </li>
+                            <li>
+                                <hr style="color: #FFFFFF; size: 10; border-top: 1px solid">
+                            </li>
+                            <div class="container">
+                                <p class="text-white">Estado: </p>
+                                @if($data->approved == '1')
+                                    <p class="text-white"><i class="material-icons">visibility</i> Visible</p>
+                                @else
+                                    <p class="text-white"><i class="material-icons">hourglass_empty</i> En espera de aprobación</p>
+                                @endif
+                            </div>
                         @elseif(auth()->user()->type == "Company")
                             <li>
                                 <a href="{{ route('timeline') }}" class="@yield('timeline')">Ver progreso</a>
+                            </li>
+                            <li>
+                                <hr style="color: #FFFFFF; size: 10; border-top: 1px solid">
                             </li>
                         @endif
                     </ul>
@@ -207,23 +210,7 @@
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="{{ asset('js/mk/material-kit.js?v=2.0.2') }}"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <script>
-    $(document).ready( function () {
-    $('#table_id').DataTable();
-    } );
-
-
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if($("#menu-toggl").text() == 'arrow_back'){
-            $("#menu-toggl").text('arrow_forward');
-        }else{
-            $("#menu-toggl").text('arrow_back');
-        }
-    });
-
-    </script>
+<script src="{{ asset('js/js.js') }}"></script>
 
   </body>
 </html>

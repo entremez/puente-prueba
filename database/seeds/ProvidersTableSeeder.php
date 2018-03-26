@@ -25,7 +25,7 @@ class ProvidersTableSeeder extends Seeder
                 $user->type = "Provider";
                 $user->type_id = $provider->id;
                 $user->save();
-                $cases = factory(Instance::class, 10)->make();
+                $cases = factory(Instance::class, 3)->make();
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();
                 for ($i=0; $i < rand(3,6); $i++) {

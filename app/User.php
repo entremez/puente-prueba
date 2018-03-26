@@ -55,7 +55,7 @@ class User extends Authenticatable
                     return 'admin/dashboard';
                     break;
                 case "Provider":
-                    return 'providers/dashboard';
+                    return 'provider/dashboard';
                     break;
                 case "Company":
                     return 'company/dashboard';

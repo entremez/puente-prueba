@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{{ asset('css/mk/material-kit.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
 
     @yield('css')
   </head>
@@ -127,13 +128,8 @@
     <script src="{{ asset('js/mk/plugins/nouislider.min.js') }}"></script>
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="{{ asset('js/mk/material-kit.js?v=2.0.2') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
 
-<script type="application/javascript">
-jQuery('input[type=file]').change(function(e){
- var filename =  e.currentTarget.files[0].name;
- $("#file").text(filename);
-});
-</script>
 
   </body>
 </html>
