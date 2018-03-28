@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Service;
 use App\ProviderService;
-use Illuminate\Support\Facades\Storage;
+use File;
 
 class ProviderController extends Controller
 {
@@ -101,7 +101,7 @@ class ProviderController extends Controller
         $this->validate($request, $rules, $messages);
         $provider = auth()->user()->name();
         if ($request->hasFile('files')) {
-            Storage::delete(public_path().'/providers/logos'.$provider->logo);
+            File::delete(public_path().'/providers/logos/'.$provider->logo);
             $file = $request->file('files');
             $path = public_path().'/providers/logos';
             $fileName = $provider->id."-".uniqid()."-".$file[0]->getClientOriginalName();
@@ -114,8 +114,8 @@ class ProviderController extends Controller
         $provider->description = $request->input('description');
         $provider->long_description = $request->input('long_description');
         $provider->save();
-
         $services = $request->input('service');
+        ProviderService::where('provider_id','=',$provider->id)->delete();
         for ($i=0; $i < count($services); $i++) {
             $provider_service = new ProviderService();
             $provider_service->provider_id = $provider->id;
