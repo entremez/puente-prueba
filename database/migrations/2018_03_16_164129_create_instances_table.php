@@ -21,7 +21,6 @@ class CreateInstancesTable extends Migration
             $table->string('company_name');
             $table->string('description');
             $table->string('long_description');
-            $table->string('default_image');
 
 
             $table->timestamps();

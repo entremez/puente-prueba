@@ -22,7 +22,20 @@ class ProviderController extends Controller
         $checked = "";
         $services = Service::get();
         $providers = Provider::inRandomOrder()->where('approved','=','1')->get();
-        return view('providers')->with(compact('providers', 'services', 'checked'));
+        $providersLeft = collect();
+        $providersCenter = collect();
+        $providersRight = collect();
+        foreach ($providers as $key => $provider) {
+            if($key%3 == 0){
+                $providersRight->push($provider);
+            }elseif($key%2 == 0){
+                $providersCenter->push($provider);
+            }else{
+                $providersLeft->push($provider);
+            }
+        }
+        $filter = "";
+        return view('providers')->with(compact('providers','providersCenter', 'providersLeft', 'providersRight', 'services', 'checked', 'filter'));
     }
 
     public function filtered(Request $request)
@@ -39,11 +52,28 @@ class ProviderController extends Controller
             }
         }
         $providers = collect();
+        $providersLeft = collect();
+        $providersCenter = collect();
+        $providersRight = collect();
         if(isset($provider_approved)){
             $providers = collect(array_unique($provider_approved));
+            foreach ($providers as $key => $provider) {
+                if($key<3){
+                    if($key == 0 )
+                        $providersLeft->push($provider);
+                    if($key == 1 )
+                        $providersCenter->push($provider);
+                    if($key == 2 )
+                        $providersRight->push($provider);
+                }else{
+                    $key%3 == 0 ? $providersLeft->push($provider): '';
+                    $key%3 == 1 ? $providersCenter->push($provider): '';
+                    $key%3 == 2 ? $providersRight->push($provider): '';
+                }
+            }
         }
-        //dd($providers);
         $services = Service::get();
-        return view('providers')->with(compact('providers', 'services', 'checked'));
+        $filter = "service";
+        return view('providers')->with(compact('providers','providersCenter', 'providersLeft', 'providersRight', 'services', 'checked', 'filter'));
     }
 }

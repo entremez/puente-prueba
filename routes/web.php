@@ -28,6 +28,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function()
 Route::group(['prefix' => 'provider', 'middleware' => ['auth','provider']], function()
 {
     Route::get('/dashboard', 'Provider\ProviderController@index')->name('provider.dashboard');
+    Route::post('/dashboard','Provider\ProviderController@edit')->name('provider.config');
+    Route::get('/settings','Provider\ProviderController@settings')->name('provider.settings');
+    Route::post('/settings','Provider\ProviderController@update')->name('provider.update');
     Route::resource('cases', 'Provider\CaseController');
 
 });

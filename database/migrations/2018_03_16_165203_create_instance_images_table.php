@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCaseImagesTable extends Migration
+class CreateInstanceImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateCaseImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('case_images', function (Blueprint $table) {
+        Schema::create('instance_images', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('image');
             $table->integer('instance_id')->unsigned();
             $table->foreign('instance_id')->references('id')->on('instances');
+            $table->boolean('featured')->default(false);
 
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ class CreateCaseImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('case_images');
+        Schema::dropIfExists('instance_images');
     }
 }

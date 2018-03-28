@@ -27,13 +27,8 @@
                     @endforeach
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{ $instance->default_image}}" alt="">
-                        <div class="carousel-caption d-none d-md-block">
-                    </div>
-                    </div>
                     @foreach($instance->images as $image)
-                    <div class="carousel-item">
+                    <div class="carousel-item {{ $image->featured == 1 ? 'active' : '' }}">
                         <img class="d-block w-100" src="{{ $image->image}}" alt="">
                         <div class="carousel-caption d-none d-md-block">
                         </div>

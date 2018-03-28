@@ -1,15 +1,6 @@
 @extends('layouts.home')
 @section('css')
-    <style type="text/css">
-        .main-raised {
-            margin: 0!important;
-            border-radius: 0!important;
-            box-shadow: none!important;
-        }
-        .espacio {
-                margin-top: 80px!important;
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/blank.css') }}">
 @endsection
 
 @section('content')
@@ -32,7 +23,7 @@
 
             <div class="col-md-4 ">
                 <div class="card">
-                    <img class="card-img-top" src="{{ $case->default_image }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ $case->featured_image }}" alt="Card image cap">
                     <div class="card-body">
                         @foreach($case->services as $services)
                                 @foreach($services->services as $service)

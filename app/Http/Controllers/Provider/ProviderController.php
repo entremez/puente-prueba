@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Service;
 use App\ProviderService;
+use Illuminate\Support\Facades\Storage;
 
 class ProviderController extends Controller
 {
@@ -30,7 +31,9 @@ class ProviderController extends Controller
             'logo.required' => 'Debe adjuntar una imagen',
             'logo.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
             'phone.required' => 'Debe ingresar número de teléfono',
-            'description.required' => 'Debe ingresar una descripción',
+            'description.required' => 'Debe ingresar una descripción de tu empresa',
+            'description.max' => 'La descripción de tu empresa no debe superar los 250 caracteres',
+            'long_description.required' => 'Debe ingresar una descripción de tus servicios',
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
         $rules = [
@@ -38,7 +41,8 @@ class ProviderController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'logo' => 'required|image',
-            'description' => 'required',
+            'description' => 'required|max:250',
+            'long_description' => 'required',
             'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
@@ -53,6 +57,7 @@ class ProviderController extends Controller
         $provider->address = $request->input('address');
         $provider->phone = $request->input('phone');
         $provider->description = $request->input('description');
+        $provider->long_description = $request->input('long_description');
         $provider->save();
 
         $services = $request->input('service');
@@ -65,4 +70,59 @@ class ProviderController extends Controller
 
         return redirect('provider/dashboard');
     }
+
+    public function settings(Request $request)
+    {
+        $user = auth()->user();
+        $services = Service::get();
+        return view('provider.settings')->with(compact('services', 'user'));
+    }
+
+    public function update(Request $request){
+        $messages = [
+            'name.required' => 'Debe ingresar el nombre.',
+            'address.required' => 'Debe ingresar la dirección',
+            'logo.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
+            'phone.required' => 'Debe ingresar número de teléfono',
+            'description.required' => 'Debe ingresar una descripción de tu empresa',
+            'description.max' => 'La descripción de tu empresa no debe superar los 250 caracteres',
+            'long_description.required' => 'Debe ingresar una descripción de tus servicios',
+            'service.required' => 'Debe seleccionar al menos un servicio',
+        ];
+        $rules = [
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'logo' => 'image|max:1500',
+            'description' => 'required|max:250',
+            'long_description' => 'required',
+            'service' => 'required',
+        ];
+        $this->validate($request, $rules, $messages);
+        $provider = auth()->user()->name();
+        if ($request->hasFile('files')) {
+            Storage::delete(public_path().'/providers/logos'.$provider->logo);
+            $file = $request->file('files');
+            $path = public_path().'/providers/logos';
+            $fileName = $provider->id."-".uniqid()."-".$file[0]->getClientOriginalName();
+            $file[0]->move($path, $fileName);
+            $provider->logo = $fileName;
+        }
+        $provider->name = $request->input('name');
+        $provider->address = $request->input('address');
+        $provider->phone = $request->input('phone');
+        $provider->description = $request->input('description');
+        $provider->long_description = $request->input('long_description');
+        $provider->save();
+
+        $services = $request->input('service');
+        for ($i=0; $i < count($services); $i++) {
+            $provider_service = new ProviderService();
+            $provider_service->provider_id = $provider->id;
+            $provider_service->service_id = $services[$i];
+            $provider_service->save();
+        }
+        return redirect('provider/dashboard');
+    }
 }
+

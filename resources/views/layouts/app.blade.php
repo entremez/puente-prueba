@@ -51,8 +51,8 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
-                            <a href="#" class="dropdown-item">
-                                <i class="material-icons">content_paste</i>
+                            <a href="{{ route('provider.settings') }}" class="dropdown-item">
+                                <i class="material-icons">settings</i> Configurar cuenta
                             </a>
                         </div>
                     </li>
@@ -114,23 +114,7 @@
                                 <hr style="color: #FFFFFF; size: 10; border-top: 1px solid">
                             </li>
                         @elseif(auth()->user()->type == "Provider")
-                            <li>
-                                <a href="" class="@yield('cases')">Administrar casos</a>
-                            </li>
-                            <li>
-                                <a href="" class="@yield('add-cases')">Agregar caso</a>
-                            </li>
-                            <li>
-                                <hr style="color: #FFFFFF; size: 10; border-top: 1px solid">
-                            </li>
-                            <div class="container">
-                                <p class="text-white">Estado: </p>
-                                @if($data->approved == '1')
-                                    <p class="text-white"><i class="material-icons">visibility</i> Visible</p>
-                                @else
-                                    <p class="text-white"><i class="material-icons">hourglass_empty</i> En espera de aprobación</p>
-                                @endif
-                            </div>
+                            @include('provider.sidebar-provider')
                         @elseif(auth()->user()->type == "Company")
                             <li>
                                 <a href="{{ route('timeline') }}" class="@yield('timeline')">Ver progreso</a>
@@ -145,7 +129,7 @@
 
                 <!-- Page Content -->
                 <br><br><br><br>
-                <button class="btn btn-primary btn-fab btn-round" id="menu-toggle">
+                <button class="btn btn-primary btn-fab btn-round col" id="menu-toggle">
                     <i id="menu-toggl" class="material-icons">arrow_back</i>
                 </button>
                 @yield('content')
@@ -210,7 +194,13 @@
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="{{ asset('js/mk/material-kit.js?v=2.0.2') }}"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<script src="{{ asset('js/js.js') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
+    <script type="text/javascript">
+            $(document).ready( function () {
+    $('#table_id').DataTable();
+    } );
+
+    </script>
 
   </body>
 </html>

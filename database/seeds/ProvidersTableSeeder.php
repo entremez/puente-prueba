@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Provider;
 use App\User;
-use App\CaseImage;
+use App\InstanceImage;
 use App\Instance;
 use App\InstanceService;
 use App\Service;
@@ -37,8 +37,10 @@ class ProvidersTableSeeder extends Seeder
                 }
 
                 $cases->each(function($case) use ($servicios){
-                        $images = factory(CaseImage::class, 3)->make();
+                        $images = factory(InstanceImage::class, 3)->make();
                         $case->images()->saveMany($images);
+                        $images[0]->featured = true;
+                        $images[0]->save();
                         for ($i=0; $i < rand(1,3); $i++) {
                             $instance_service = new InstanceService();
                             $instance_service->instance_id = $case->id;

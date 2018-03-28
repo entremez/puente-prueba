@@ -1,36 +1,7 @@
 @extends('layouts.blank')
 @section('dashboard', 'active')
 @section('css')
-    <style type="text/css">
-        .main-raised {
-            margin: 0!important;
-            border-radius: 0!important;
-            box-shadow: none!important;
-        }
-        .espacio {
-                margin-top: 80px!important;
-        }
-machete:
-
-.fileContainer {
-    overflow: hidden;
-    position: relative;
-}
-
-.fileContainer [type=file] {
-
-    display: block;
-
-    filter: alpha(opacity=0);
-    min-height: 100%;
-    min-width: 100%;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    text-align: right;
-    top: 0;
-}
-    </style>
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/blank.css') }}">
 @endsection
 
 @section('content')
@@ -48,7 +19,7 @@ machete:
                 </ul>
             </div>
             @endif
-    <form class="contact-form" method="POST" action="{{ url('/provider/dashboard') }}" enctype="multipart/form-data">
+    <form class="contact-form" method="POST" action="{{ route('provider.config') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="row">
@@ -88,12 +59,15 @@ machete:
                 </label>
             </div>
         </div>
-        <ul>
 
-        </ul>
+        <div class="form-group">
+            <label for="exampleMessage" class="bmd-label-floating">Cuéntanos, en pocas palabras, algo de tu empresa</label>
+            <textarea type="textarea" name="description" class="form-control" rows="2" id="exampleMessage">{{ old('description', $data->description) }}</textarea>
+        </div>
+
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos de tus servicios</label>
-            <textarea type="textarea" name="description" class="form-control" rows="4" id="exampleMessage">{{ old('description', $data->description) }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" id="exampleMessage">{{ old('long_description', $data->long_description) }}</textarea>
         </div>
 
             <h4>Selecciona los servicios que prestas</h4>
@@ -124,6 +98,5 @@ machete:
 </div>
 
 
-
-
 @endsection
+

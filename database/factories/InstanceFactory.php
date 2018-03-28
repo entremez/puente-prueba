@@ -8,6 +8,5 @@ $factory->define(App\Instance::class, function (Faker $faker) {
         'company_name' => $faker->company,
         'description' => $faker->sentence(10),
         'long_description' => $faker->text,
-        'default_image' => $faker->imageUrl($width = 640, $height = 480)
     ];
 });

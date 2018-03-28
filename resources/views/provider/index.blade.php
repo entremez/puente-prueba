@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('providers', 'active')
+@section('cases', 'active')
 
 @section('content')
 

@@ -38,7 +38,7 @@
     </div>
 
     <div class="container mt-3">
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseOne" class="collapse {{ $filter=='service' ? 'show':'' }}" aria-labelledby="headingOne" data-parent="#accordion">
             <small>Selecciona los servicios para ver proveedores que lo/s realizan.</small>
             <form method="post" action="{{ route('providers-list') }}">
                 {{ csrf_field() }}
@@ -67,15 +67,14 @@
         </div>
     </div>
 </div>
-
+<br>
 
         @if($providers->count() > 0)
         <div class="row">
-            @foreach($providers as $provider)
-
-            <div class="col-md-4 ">
-                <div class="card">
-                    <img class="card-img-top" src="{{ $provider->logo }}" alt="{{ $provider->name }}">
+            <div class="col-md-4">
+            @foreach($providersLeft as $provider)
+                <div class="card my-0">
+                    <img class="card-img-top" src="{{ $provider->url }}" alt="{{ $provider->name }}">
                     <div class="card-body px-4">
 
                         <h5 class="card-title">{{ ucfirst($provider->name) }}</h5>
@@ -102,13 +101,78 @@
                             @endforeach
                         </div>
                     </div>
-
                 </div>
                 <br>
-            </div>
-
-
             @endforeach
+            </div>
+            <div class="col-md-4">
+            @foreach($providersCenter as $provider)
+                <div class="card my-0">
+                    <img class="card-img-top" src="{{ $provider->url }}" alt="{{ $provider->name }}">
+                    <div class="card-body px-4">
+
+                        <h5 class="card-title">{{ ucfirst($provider->name) }}</h5>
+                        <p class="card-text">{{ $provider->description }}</p>
+                            <div class="row">
+                                <div class="col">
+                                    <span><i class="float-left"></i><a href="{{ route('provider', $provider->id) }}" class="btn btn-primary text-center">Ver más</a></span>
+                                </div>
+                                <div class="col">
+                                    <span class="float-right text-center">Casos <br>{{ $provider->instances()->count() }}</span>
+                                </div>
+                            </div>
+
+
+                        <div class="card-footer px-0">
+                            @foreach($provider->services()->get() as $services)
+                                @foreach($services->service()->get() as $service)
+                                <a href="{{ route('service',$service) }}">
+                                    <span class="badge badge-success">
+                                        {{ $service->name }}
+                                    </span>
+                                </a>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <br>
+            @endforeach
+            </div>
+            <div class="col-md-4">
+            @foreach($providersRight as $provider)
+                <div class="card my-0">
+                    <img class="card-img-top" src="{{ $provider->url }}" alt="{{ $provider->name }}">
+                    <div class="card-body px-4">
+
+                        <h5 class="card-title">{{ ucfirst($provider->name) }}</h5>
+                        <p class="card-text">{{ $provider->description }}</p>
+                            <div class="row">
+                                <div class="col">
+                                    <span><i class="float-left"></i><a href="{{ route('provider', $provider->id) }}" class="btn btn-primary text-center">Ver más</a></span>
+                                </div>
+                                <div class="col">
+                                    <span class="float-right text-center">Casos <br>{{ $provider->instances()->count() }}</span>
+                                </div>
+                            </div>
+
+
+                        <div class="card-footer px-0">
+                            @foreach($provider->services()->get() as $services)
+                                @foreach($services->service()->get() as $service)
+                                <a href="{{ route('service',$service) }}">
+                                    <span class="badge badge-success">
+                                        {{ $service->name }}
+                                    </span>
+                                </a>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <br>
+            @endforeach
+            </div>
        </div>
        @else
        <p>No hay resultados para mostrar.</p>

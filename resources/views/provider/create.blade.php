@@ -1,5 +1,5 @@
-@extends('layouts.blank')
-@section('dashboard', 'active')
+@extends('layouts.app')
+@section('cases.create', 'active')
 @section('css')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
@@ -7,8 +7,7 @@
 @endsection
 
 @section('content')
-<div class="espacio">
-    <h2>Agregar un caso de éxito</h2>
+    <h2 class="text-center mt-0">Agregar un caso de éxito</h2>
             @if ($errors->any())
             <div class="alert alert-danger">
                 <button type="button" class="close" aria-label="Close" data-dismiss="alert">
@@ -21,7 +20,7 @@
                 </ul>
             </div>
             @endif
-    <form class="contact-form" method="POST" action="{{ url('/provider/dashboard') }}" enctype="multipart/form-data">
+    <form class="contact-form" method="POST" action="{{ route('cases.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="row">
@@ -36,7 +35,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Nombre empresa</label>
-                    <input type="text" name="company_name" class="form-control" value="{{ old('address') }}" required>
+                    <input type="text" name="company_name" class="form-control" value="{{ old('company_name') }}" required>
                     <small>Nombre de la empresa donde se llevó a cabo el caso</small>
                 </div>
             </div>
@@ -47,14 +46,14 @@
         </div>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos con mas detalle el caso</label>
-            <textarea type="textarea" name="description" class="form-control" rows="4" id="exampleMessage">{{ old('description') }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" id="exampleMessage">{{ old('long_description') }}</textarea>
         </div>
 
         <div class="row pt-5">
             <div class="col-md-4 ml-auto mr-auto text-center">
                 <label class="fileContainer">
                     <button type="button" class="btn btn-success"><i class="material-icons">add_a_photo</i> Selecciona imágenes que representen el caso <input type="file" name="images[]" required multiple></button>
-                    <ul id="file">Máximo 4</ul>
+                    <ul class="pl-0" id="file">Máximo 4</ul>
                 </label>
             </div>
         </div>
@@ -87,9 +86,5 @@
             </div>
         </div>
     </form>
-</div>
-
-
-
 
 @endsection

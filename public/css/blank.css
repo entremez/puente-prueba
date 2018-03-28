@@ -1,13 +1,17 @@
-        .main-raised {
-            margin: 0!important;
-            border-radius: 0!important;
-            box-shadow: none!important;
-        }
-        .espacio {
-                margin-top: 80px!important;
-        }
+body{
+    background-color: #FFFFFF;
+}
 
-        .fileContainer {
+.main-raised {
+    margin: 0!important;
+    border-radius: 0!important;
+    box-shadow: none!important;
+}
+.espacio {
+        margin-top: 80px!important;
+}
+
+.fileContainer {
     overflow: hidden;
     position: relative;
 }
@@ -15,7 +19,6 @@
 .fileContainer [type=file] {
 
     display: block;
-
     filter: alpha(opacity=0);
     min-height: 100%;
     min-width: 100%;

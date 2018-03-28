@@ -33,8 +33,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
-                            <i class="material-icons">perm_identity</i> {{ auth()->user()->email }}
+                        <a class="nav-link" href="{{ route(auth()->user()->route_name)   }}" onclick="scrollToDownload()">
+                            <i class="material-icons">perm_identity</i> {{ auth()->user()->name()->name }}
                         </a>
                     </li>
                     <li class="dropdown nav-item">

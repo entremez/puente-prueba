@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CaseImage extends Model
+class InstanceImage extends Model
 {
     public function case()
     {

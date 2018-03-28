@@ -14,4 +14,8 @@ class Service extends Model
     {
         return $this->hasMany('App\InstanceService');
     }
+
+    public function providers(){
+        return $this->hasMany('App\ProviderService','provider_id','id');
+    }
 }
