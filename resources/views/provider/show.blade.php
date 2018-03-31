@@ -1,18 +1,24 @@
-@extends('layouts.blank')
+@extends('layouts.app')
+@section('cases', 'active')
 @section('css')
+
 <link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
+
 @endsection
 
 @section('content')
-<div class="container">
-<br><br><br>
-</div>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('provider.dashboard') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('cases.index') }}">Administrar casos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Detalle</li>
+</ol>
+
 <div class="row">
     <div class="col-md-5">
         <div class="card card-raised card-carousel" style="max-width: 600px">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-
                     @foreach($instance->images  as $key => $image)
                         <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $image->featured == 1 ? 'active' : '' }}"></li>
                     @endforeach
@@ -44,25 +50,10 @@
         <p>{{ $instance->long_description }}</p>
         @foreach($instance->services as $service)
             @foreach($service->services as $tag)
-                <a href="{{ route('service',$tag) }}"><span class="badge badge-success">{{ $tag->name }}</span></a>
+                <span class="badge badge-success">{{ $tag->name }}</span>
             @endforeach
         @endforeach
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8">
-        <h2 class="mt-2">{{ $instance->provider->name }}</h2>
-        <p><i class="material-icons">location_on</i> {{ $instance->provider->address }}</p>
-        <p><i class="material-icons">web</i> {{ $instance->provider->web }}</p>
-        <p><i class="material-icons">mail</i> {{ $instance->provider->email }}</p>
-        <p><i class="material-icons">description</i> {{ $instance->provider->description }}</p>
-        <p>
-            <a  href="{{ route('provider',$instance->provider->id) }}" class="btn btn-primary btn-round">
-                <i class="material-icons">add</i> Ver todos los proyectos realizados por la empresa {{ $instance->provider->name }}
-            </a>
-        </p>
-    </div>
-</div>
-
 
 @endsection

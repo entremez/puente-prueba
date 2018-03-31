@@ -32,6 +32,10 @@ Route::group(['prefix' => 'provider', 'middleware' => ['auth','provider']], func
     Route::get('/settings','Provider\ProviderController@settings')->name('provider.settings');
     Route::post('/settings','Provider\ProviderController@update')->name('provider.update');
     Route::resource('cases', 'Provider\CaseController');
+    Route::get('/case/{id}/images','Provider\CaseImagesController@index')->name('images.case');
+    Route::delete('/case/{id}/images','Provider\CaseImagesController@destroy')->name('images.destroy');
+    Route::post('/case/{id}/images','Provider\CaseImagesController@featured')->name('images.featured');
+    Route::put('/case/{id}/images','Provider\CaseImagesController@update')->name('images.update');
 
 });
 Route::get('/provider/register', 'Provider\RegisterController@showRegistrationForm')->name('provider-register');

@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Instance extends Model
 {
+
+    protected $fillable = [
+        'name', 'company_name', 'description', 'long_description'
+    ];
+
     public function provider()
     {
         return $this->belongsTo('App\Provider');
@@ -21,6 +26,17 @@ class Instance extends Model
 
     public function getFeaturedImageAttribute()
     {
-        return $this->images()->where('featured','=', '1')->get()->first()->image;
+        $image = $this->images()->where('featured','=', '1')->get()->first()->image;
+        if(substr($image, 0, 4) === "http")
+            return $image;
+        return 'providers/cases/'.$this->id.'/'.$this->images()->where('featured','=', '1')->get()->first()->image;
+    }
+
+    public function getFeaturedImageProvidersAttribute()
+    {
+        $image = $this->images()->where('featured','=', '1')->get()->first()->image;
+        if(substr($image, 0, 4) === "http")
+            return $image;
+        return 'cases/'.$this->id.'/'.$this->images()->where('featured','=', '1')->get()->first()->image;
     }
 }

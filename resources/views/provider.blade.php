@@ -50,7 +50,7 @@
 
             <div class="col-md-4 ">
                 <div class="card">
-                    <img class="card-img-top" src="{{ $case->featured_image }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ $case->featured_image_providers }}" alt="Card image cap">
                     <div class="card-body">
                         @foreach($case->services as $services)
                                 @foreach($services->services as $service)

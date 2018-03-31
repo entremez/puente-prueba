@@ -122,7 +122,7 @@ class ProviderController extends Controller
             $provider_service->service_id = $services[$i];
             $provider_service->save();
         }
-        return redirect('provider/dashboard');
+        return redirect('provider/dashboard')->withSuccess( 'Datos modificados correctamente');
     }
 }
 

@@ -29,9 +29,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-            @if(auth()->check())
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="{{ route('providers-list') }}" class="nav-link">
+                            <i class="material-icons">list</i> Listado proveedores
+                        <div class="ripple-container"></div></a>
+                    </li>
+                    @if(auth()->check())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route(auth()->user()->route_name)   }}" onclick="scrollToDownload()">
                             <i class="material-icons">perm_identity</i> {{ auth()->user()->name()->name }}
@@ -52,11 +57,7 @@
                             </form>
                         </div>
                     </li>
-                </ul>
-            </div>
-            @else
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
+                    @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}" onclick="scrollToDownload()">
                             <i class="material-icons">person_outline</i> Inicia sesión
@@ -67,9 +68,9 @@
                             <i class="material-icons">person_add</i> Regístrate
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
-            @endif
         </div>
     </nav>
     <div class="main main-raised">

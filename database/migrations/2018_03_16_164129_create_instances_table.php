@@ -17,6 +17,8 @@ class CreateInstancesTable extends Migration
             $table->increments('id');
 
             $table->integer('provider_id')->unsigned();
+            $table->foreign('provider_id')->references('id')->on('providers');
+
             $table->string('name');
             $table->string('company_name');
             $table->string('description');

@@ -13,8 +13,8 @@ class InstanceImage extends Model
 
     public function getUrlAttribute()
     {
-        if(substr($this->logo, 0, 4) === "http")
+        if(substr($this->image, 0, 4) === "http")
             return $this->image;
-        return '/images/cases/'.$this->image;
+        return '/providers/cases/'.$this->instance_id.'/'.$this->image;
     }
 }

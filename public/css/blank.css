@@ -28,3 +28,12 @@ body{
     text-align: right;
     top: 0;
 }
+
+.breadcrumb {
+    display: inline-flex!important;
+    background-color: transparent!important;
+}
+
+.breadcrumb-item.active{
+    color: #000000!important;
+}

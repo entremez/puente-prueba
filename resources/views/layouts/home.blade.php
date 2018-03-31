@@ -27,9 +27,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-            @if(auth()->check())
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="{{ route('providers-list') }}" class="nav-link">
+                            <i class="material-icons">list</i> Listado proveedores
+                        <div class="ripple-container"></div></a>
+                    </li>
+                    @if(auth()->check())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route($dashboard) }}" onclick="scrollToDownload()">
                             <i class="material-icons">person</i> {{ auth()->user()->name }}
@@ -53,16 +58,7 @@
                             </a>
                         </div>
                     </li>
-                </ul>
-            </div>
-            @else
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="{{ route('providers-list') }}" class="nav-link">
-                            <i class="material-icons">list</i> Listado proveedores
-                        <div class="ripple-container"></div></a>
-                    </li>
+                    @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}" onclick="scrollToDownload()">
                             <i class="material-icons">person_outline</i> Inicia sesión
@@ -73,9 +69,9 @@
                             <i class="material-icons">person_add</i> Regístrate
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
-            @endif
         </div>
     </nav>
     <div class="page-header header-filter" data-parallax="true" style=" background-image: url('https://www.walldevil.com/wallpapers/a50/nature-wallpaper-forest-forests-bridges-bridge-background-australia-desktop.jpg'); background-size: cover; ">

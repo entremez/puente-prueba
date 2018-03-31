@@ -43,4 +43,4 @@ console.log (files);
       }
     }
 
-    document.getElementById('files').addEventListener('change', archivo, false);
+document.getElementById('files').addEventListener('change', archivo, false);

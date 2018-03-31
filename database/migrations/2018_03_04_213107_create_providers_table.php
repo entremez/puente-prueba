@@ -25,6 +25,7 @@ class CreateProvidersTable extends Migration
             $table->string('description')->nullable();
             $table->text('long_description')->nullable();
             $table->boolean('approved')->default(false);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

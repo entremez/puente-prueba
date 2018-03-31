@@ -1,6 +1,6 @@
 @extends('layouts.home')
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/blank.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
 @endsection
 
 @section('content')
