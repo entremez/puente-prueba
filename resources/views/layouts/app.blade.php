@@ -99,7 +99,14 @@
                                 <a href="{{ route('companies') }}" class="@yield('companies')">Empresas</a>
                             </li>
                             <li>
-                                <a href="{{ route('providers') }}" class="@yield('providers')">Proveedores</a>
+                                <a href="{{ route('providers') }}" class="@yield('providers')">Proveedores
+                                    <span class="badge badge-success" style="display: inline">{{$providers->where('approved','=','1')->count()}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.request') }}" class="@yield('request')">Solicitudes de alta
+                                    <span class="badge badge-success" style="display: inline">{{$providers->where('status','=','1')->count()}}</span>
+                                </a>
                             </li>
                             <li>
                                 <a href="#">Encuestas</a>
@@ -196,8 +203,14 @@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script src="{{ asset('js/js.js') }}"></script>
     <script type="text/javascript">
-            $(document).ready( function () {
+    $(document).ready( function () {
     $('#table_id').DataTable();
+    } );
+    $(document).ready( function () {
+    $('#table_id_2').DataTable();
+    } );
+    $(document).ready( function () {
+    $('#table_id_3').DataTable();
     } );
 
     </script>

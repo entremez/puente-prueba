@@ -37,3 +37,7 @@ body{
 .breadcrumb-item.active{
     color: #000000!important;
 }
+
+.tab-pane.active.show{
+    color: #000000!important;
+}

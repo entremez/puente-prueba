@@ -61,7 +61,7 @@
         <div class="progress-bar progress-bar-{{ $data->cases()->count() >= config('constants.min_cases') ? 'success':'danger' }}" style="width: 33%">
 <!--             <span class="sr-only">33% Complete (warning)</span> -->
         </div>
-        <div class="progress-bar progress-bar-danger" style="width: 34%">
+        <div class="progress-bar progress-bar-{{ $data->status == '1' ? 'warning':'danger' }}" style="width: 34%">
 <!--             <span class="sr-only">33% Complete (danger)</span> -->
         </div>
     </div>
@@ -75,7 +75,11 @@
                 Agregar casos de éxito
             </div>
             <div class="col-md-4">
-                Solicitar alta
+                @if($data->status == 1)
+                    <p>Solicitud en revisión</p>
+                @else
+                    <p>Solicitar alta</p>
+                @endif
             </div>
         </div>
         <div class="row text-center">
@@ -104,8 +108,16 @@
                 @if($data->cases()->count() < config('constants.min_cases'))
                 <p>Una vez completados los pasos anteriores solicita tu alta en el sitió en el link que aparecerá acá.</p>
                 @else
-                <button class="btn btn-success">Solicitar alta</button>
-                <p>Presiona el boton y los administradores revisarán tu perfil.</p>
+                    @if($data->status == 1)
+                    <p>La solicitud fue enviada a los administradores. Dentro de las próximas horas recibirás la confirmación o detalles de tu cuenta.</p>
+                    @else
+                    <form form class="contact-form" method="POST" action="{{ route('provider.request' ) }}">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+                        <button class="btn btn-success">Solicitar alta</button>
+                    </form>
+                    <p>Presiona el boton y los administradores revisarán tu perfil.</p>
+                    @endif
                 @endif
             </div>
         </div>

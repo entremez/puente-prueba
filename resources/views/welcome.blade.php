@@ -20,7 +20,6 @@
     <div class="container">
         <div class="row">
             @foreach($cases as $case)
-
             <div class="col-md-4 ">
                 <div class="card">
                     <img class="card-img-top" src="{{ $case->featured_image }}" alt="Card image cap">

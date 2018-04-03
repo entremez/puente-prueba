@@ -2,7 +2,10 @@
 @section('companies', 'active')
 
 @section('content')
-
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+</ol>
     <div class="row">
         <div class="col-md-12">
             <h2>Empresas</h2>

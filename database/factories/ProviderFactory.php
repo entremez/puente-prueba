@@ -13,6 +13,6 @@ $factory->define(App\Provider::class, function (Faker $faker) {
         'phone' => $faker->e164PhoneNumber,
         'description' => $faker->sentence(10),
         'long_description' => $faker->text,
-        'approved' => $faker->boolean,
+        'approved' => false,
     ];
 });

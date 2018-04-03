@@ -26,7 +26,7 @@
             </div>
             @endif
 
-    @if($user->name()->instances()->count() <= config('constants.max_cases'))
+    @if($user->name()->instances()->count() < config('constants.max_cases'))
     <form class="contact-form" method="POST" action="{{ route('cases.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
 

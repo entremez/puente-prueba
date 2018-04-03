@@ -17,6 +17,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function()
 {
     Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/dashboard/providers', 'Admin\AdminController@showProviders')->name('providers');
+    Route::get('/dashboard/providers/request', 'Admin\AdminController@request')->name('admin.request');
     Route::get('/dashboard/companies', 'Admin\AdminController@showCompanies')->name('companies');
     Route::get('/dashboard/providers/{provider}/edit', 'Admin\Provider\AdminProviderController@edit')->name('edit-provider');
     Route::get('/register', 'Admin\RegisterController@showRegistrationForm')->name('admin-register');
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'provider', 'middleware' => ['auth','provider']], func
 {
     Route::get('/dashboard', 'Provider\ProviderController@index')->name('provider.dashboard');
     Route::post('/dashboard','Provider\ProviderController@edit')->name('provider.config');
+    Route::put('/dashboard','Provider\ProviderController@request')->name('provider.request');
     Route::get('/settings','Provider\ProviderController@settings')->name('provider.settings');
     Route::post('/settings','Provider\ProviderController@update')->name('provider.update');
     Route::resource('cases', 'Provider\CaseController');

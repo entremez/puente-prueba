@@ -124,5 +124,13 @@ class ProviderController extends Controller
         }
         return redirect('provider/dashboard')->withSuccess( 'Datos modificados correctamente');
     }
+
+     public function request()
+     {
+        $provider = auth()->user()->name();
+        $provider->status = 1;
+        $provider->save();
+        return redirect('provider/dashboard')->withSuccess( 'Solicitud enviada a administradores');
+     }
 }
 

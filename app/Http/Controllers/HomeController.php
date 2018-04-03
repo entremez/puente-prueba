@@ -43,7 +43,13 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $cases = Instance::inRandomOrder()->paginate(6);
+        $cases = Instance::inRandomOrder()->get();
+        $cases_approved = collect();
+        foreach ($cases as $case) {
+            if($case->provider()->get()->first()->approved == 1)
+                $cases_approved->put($case);
+        }
+        $cases = $cases_approved;
         if(auth()->check())
             $dashboard = auth()->user()->route_name;
         return view('welcome')->with(compact('cases', 'dashboard'));

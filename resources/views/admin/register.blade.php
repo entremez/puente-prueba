@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Agregar administrador</li>
+</ol>
 <div class="container">
     <div class="col-md-6 offset-md-3">
         <h2 class="mt-0">Agregar Administrador</h2>
