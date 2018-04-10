@@ -46,8 +46,9 @@ class HomeController extends Controller
         $cases = Instance::inRandomOrder()->get();
         $cases_approved = collect();
         foreach ($cases as $case) {
-            if($case->provider()->get()->first()->approved == 1)
-                $cases_approved->put($case);
+            if($case->provider()->get()->first()->approved == true){
+                $cases_approved->push($case);
+            }
         }
         $cases = $cases_approved;
         if(auth()->check())

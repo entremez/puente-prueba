@@ -7,7 +7,12 @@ Route::get('/providers/{provider}', 'ProviderController@detail')->name('provider
 Route::get('/provider', 'ProviderController@show')->name('providers-list');
 Route::post('/provider', 'ProviderController@filtered')->name('providers-list');
 
+Route::get('/travel','TravelController@mainTravel')->middleware('auth.travel')->name('travel');
+Route::get('/login/travel', 'Auth\LoginController@showLoginFormTrip')->name('travel.login');
+Route::get('/guest/travel','TravelController@guestTravel')->name('travel.guest');
+
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 

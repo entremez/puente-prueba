@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'provider' => Middleware\ProviderMiddleware::class,
         'admin' => Middleware\AdminMiddleware::class,
         'company' => Middleware\CompanyMiddleware::class,
+        'auth.travel' => Middleware\AuthTravel::class,
 
     ];
 }
