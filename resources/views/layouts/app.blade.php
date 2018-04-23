@@ -109,7 +109,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Encuestas</a>
+                                <a href="{{ route('surveys.index') }}" class="@yield('survey')">Encuestas</a>
                             </li>
                             <li>
                                 <a href="#">Informes</a>
