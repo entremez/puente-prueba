@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SurveyQuestion extends Model
+class ResponseChoise extends Model
 {
     public function question()
     {
         return $this->belongsTo('App\Question', 'question_id');
     }
 
-    public function survey()
+    public function responses()
     {
-        return $this->belongsTo('App\Survey', 'survey_id');
+        return $this->hasMany('App\Response', 'reponse_choise_id');
     }
 }
