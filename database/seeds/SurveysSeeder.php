@@ -11,7 +11,6 @@ class SurveysSeeder extends Seeder
      */
     public function run()
     {
-        //$question_types = factory(App\QuestionType::class, 5)->create();
         $question_type = new App\QuestionType();
         $question_type->type = "Selección múltiple";
         $question_type->description = "Es posible seleccionar varias respuestas de las opciones entregadas";
@@ -25,8 +24,8 @@ class SurveysSeeder extends Seeder
             $questions = factory(App\Question::class, 10)->make();
             $question_type->questions()->saveMany($questions);
             $questions->each(function($question){
-                $response_choises = factory(App\ResponseChoise::class, 5)->make();
-                $question->response_choises()->saveMany($response_choises);
+                $response_choices = factory(App\ResponseChoice::class, 5)->make();
+                $question->response_choices()->saveMany($response_choices);
                 });
         });
         factory(App\Survey::class, 1)->create();
@@ -45,5 +44,31 @@ class SurveysSeeder extends Seeder
         $surveyQuestion->question_id = 20;
         $surveyQuestion->order = 1;
         $surveyQuestion->save();
+
+        $survey_response = new App\SurveyResponse();
+        $survey_response->survey_id = App\Survey::get()->first()->id;
+        $survey_response->company_id = App\Company::inRandomOrder()->get()->first()->id;
+        $survey_response->save();
+
+        $questions = App\SurveyQuestion::where('survey_id','1')->get();
+        foreach ($questions as $question) {
+            $response = new App\Response();
+            $response->survey_response_id = $survey_response->id;
+            $response->response_choice_id = App\ResponseChoice::where('question_id',$question->id)->inRandomOrder()->get()->first()->id;
+            $response->save();
+        }
+
+        $survey_response = new App\SurveyResponse();
+        $survey_response->survey_id = App\Survey::get()->first()->id;
+        $survey_response->company_id = App\Company::inRandomOrder()->get()->first()->id;
+        $survey_response->save();
+
+        $questions = App\SurveyQuestion::where('survey_id','1')->get();
+        foreach ($questions as $question) {
+            $response = new App\Response();
+            $response->survey_response_id = $survey_response->id;
+            $response->response_choice_id = App\ResponseChoice::where('question_id',$question->id)->inRandomOrder()->get()->first()->id;
+            $response->save();
+        }
     }
 }

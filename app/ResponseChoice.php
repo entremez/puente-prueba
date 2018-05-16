@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ResponseChoise extends Model
+class ResponseChoice extends Model
 {
     public function question()
     {
@@ -13,6 +13,6 @@ class ResponseChoise extends Model
 
     public function responses()
     {
-        return $this->hasMany('App\Response', 'reponse_choise_id');
+        return $this->hasMany('App\Response', 'reponse_choice_id');
     }
 }

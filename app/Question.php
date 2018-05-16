@@ -11,9 +11,9 @@ class Question extends Model
         return $this->belongsTo('App\QuestionType', 'question_type_id');
     }
 
-    public function response_choises()
+    public function response_choices()
     {
-        return $this->hasMany('App\ResponseChoise', 'question_id');
+        return $this->hasMany('App\ResponseChoice', 'question_id');
     }
 
     public function survey_questions()

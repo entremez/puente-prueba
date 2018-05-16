@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Survey;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class QuestionController extends Controller
+class ResponseChoiceController extends Controller
 {
     /**
      * Display a listing of the resource.

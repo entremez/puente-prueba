@@ -19,8 +19,8 @@ class CreateResponsesTable extends Migration
             $table->integer('survey_response_id')->unsigned();
             $table->foreign('survey_response_id')->references('id')->on('survey_responses');
 
-            $table->integer('response_choise_id')->unsigned();
-            $table->foreign('response_choise_id')->references('id')->on('response_choises');
+            $table->integer('response_choice_id')->unsigned();
+            $table->foreign('response_choice_id')->references('id')->on('response_choices');
 
             $table->timestamps();
         });

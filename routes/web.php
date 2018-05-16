@@ -32,8 +32,10 @@ Route::group([
     Route::get('/register', 'RegisterController@showRegistrationForm')->name('admin-register');
     Route::post('/register', 'RegisterController@create');
 
-    Route::resource('surveys', 'SurveyController');
-    Route::resource('questions', 'QuestionController');
+    Route::resource('surveys', 'Survey\SurveyController');
+    Route::resource('questions', 'Survey\QuestionController');
+    Route::resource('question_types', 'Survey\QuestionTypeController');
+    Route::resource('response_choices', 'Survey\ResponseChoiceController');
 });
 
 //RUTAS PROVEEDORES

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResponseChoisesTable extends Migration
+class CreateResponseChoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateResponseChoisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('response_choises', function (Blueprint $table) {
+        Schema::create('response_choices', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('question_id')->unsigned();
@@ -32,6 +32,6 @@ class CreateResponseChoisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('response_choises');
+        Schema::dropIfExists('response_choices');
     }
 }

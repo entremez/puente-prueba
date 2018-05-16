@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Survey;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Provider;
 
-class SurveyController extends Controller
+class QuestionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return view('admin.survey.survey-dashboard')->with(compact('providers'));
+        //
     }
 
     /**
