@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Survey;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ResponseChoice as Responses;
+use App\Question as Question;
 
 class ResponseChoiceController extends Controller
 {
@@ -12,9 +14,10 @@ class ResponseChoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $responses = Responses::where('question_id', $request->input('question'))->get();
+        return view('admin.survey.response_choises-index')->with(compact('responses'));
     }
 
     /**
@@ -22,9 +25,10 @@ class ResponseChoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $question = Question::find($request->input('question'));
+        return view('admin.survey.response-create')->with(compact('question'));
     }
 
     /**
