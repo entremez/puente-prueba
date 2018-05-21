@@ -21,31 +21,33 @@
     <div class="row">
             <div class="col-md-12">
                 <h3>Encuestas</h3>
-                <table id="table_id" class="display">
+                <table class="table">
                   <thead class="thead-dark">
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Descripción</th>
                       <th scope="col">Preguntas</th>
+                      <th scope="col">N° de veces respondida</th>
                       <th scope="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach ($surveys as $key=>$survey)
-                    <tr>
+                    <tr data-id = "{{ $survey->id }}">
                         <th scope="row">{{ $key+1 }}</th>
-                        <td>{{ $survey->name }}</td>
+                        <td>{{ $survey->name }}
+                                <span class="badge badge-pill badge-success {{ $survey->active ? '' : 'd-none'}}" id = "active">Activa</span>
+                        </td>
                         <td>{{ $survey->description }}</td>
                         <td>{{ $survey->survey_questions()->get()->count() }}</td>
+                        <td>{{ $survey->survey_responses()->get()->count() }}</td>
                         <td>
-                            <a href="{{ route('surveys.edit', $survey->id ) }}">editar</a>
-                            <a href="{{ route('surveys.show', $survey->id ) }}">ver+</a>
-                            <form method="POST" action="{{ route('surveys.destroy', $survey->id) }}">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button>-</button>
-                            </form>
+                            <a href="{{ route('surveys.edit', $survey->id ) }}" class="btn btn-info">editar</a>
+                            <a href="{{ route('surveys.show', $survey->id ) }}" class="btn btn-primary">ver+</a>
+                            <a href="#!" class = "btn btn-danger btn-destroy">Borrar</a>
+                            <a href="#!" class="btn btn-success btn-activate {{ $survey->active ? 'd-none' : ''}}">Activar</button>
+
                         </td>
                     </tr>
                     @endforeach
@@ -54,4 +56,16 @@
             </div>
     </div>
 </div>
+
+
+<form method="post" action="{{ route('surveys.destroy', ':SURVEY_ID') }}" id="form-destroy">
+    {{ method_field('DELETE') }}
+    {{ csrf_field() }}
+</form>
+
+<form method="post" action="{{ route('surveys.update', ':SURVEY_ID') }}" id="form-activate">
+    {{ method_field('PATCH') }}
+    {{ csrf_field() }}
+    <input type="hidden" name="active" value="true">
+</form>
 @endsection

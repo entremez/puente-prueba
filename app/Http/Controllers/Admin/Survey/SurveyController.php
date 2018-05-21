@@ -89,6 +89,18 @@ class SurveyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->input('active')){
+            $activeSurvey = Survey::where('active', true)->first();
+            $activeSurvey->active = false;
+            $activeSurvey->save();
+            $survey = Survey::find($id);
+            $survey->active = true;
+            $survey->save();
+            return response()->json([
+                'id'      => $id,
+                'message' => "activado"
+            ]);
+        }
         $rules = [
             'name' => 'required|string|min:4',
             'description' => 'required|string|max:255',
@@ -113,10 +125,18 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $survey = Survey::find($id);
         $survey->delete();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'id'      => $id,
+                'message' => "Usuario eliminado"
+            ]);
+        }
+
         return redirect()->route('surveys.index');
     }
 }

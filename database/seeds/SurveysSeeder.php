@@ -11,6 +11,10 @@ class SurveysSeeder extends Seeder
      */
     public function run()
     {
+        factory(App\Survey::class, 2)->create();
+        $survey = App\Survey::find(1);
+        $survey->active = true;
+        $survey->save();
         $question_type = new App\QuestionType();
         $question_type->type = "Selección múltiple";
         $question_type->description = "Es posible seleccionar varias respuestas de las opciones entregadas";
@@ -21,14 +25,14 @@ class SurveysSeeder extends Seeder
         $question_type->save();
         $question_types = App\QuestionType::all();
         $question_types->each(function($question_type){
-            $questions = factory(App\Question::class, 10)->make();
+            $questions = factory(App\Question::class, 5)->make();
             $question_type->questions()->saveMany($questions);
             $questions->each(function($question){
-                $response_choices = factory(App\ResponseChoice::class, 5)->make();
+                $response_choices = factory(App\ResponseChoice::class, 3)->make();
                 $question->response_choices()->saveMany($response_choices);
+                $question->save();
                 });
         });
-        factory(App\Survey::class, 1)->create();
         $surveyQuestion = new App\SurveyQuestion();
         $surveyQuestion->survey_id = 1;
         $surveyQuestion->question_id = 1;
@@ -36,12 +40,27 @@ class SurveysSeeder extends Seeder
         $surveyQuestion->save();
         $surveyQuestion = new App\SurveyQuestion();
         $surveyQuestion->survey_id = 1;
-        $surveyQuestion->question_id = 15;
+        $surveyQuestion->question_id = 5;
         $surveyQuestion->order = 2;
         $surveyQuestion->save();
         $surveyQuestion = new App\SurveyQuestion();
         $surveyQuestion->survey_id = 1;
-        $surveyQuestion->question_id = 20;
+        $surveyQuestion->question_id = 10;
+        $surveyQuestion->order = 1;
+        $surveyQuestion->save();
+        $surveyQuestion = new App\SurveyQuestion();
+        $surveyQuestion->survey_id = 2;
+        $surveyQuestion->question_id = 2;
+        $surveyQuestion->order = 3;
+        $surveyQuestion->save();
+        $surveyQuestion = new App\SurveyQuestion();
+        $surveyQuestion->survey_id = 2;
+        $surveyQuestion->question_id = 7;
+        $surveyQuestion->order = 2;
+        $surveyQuestion->save();
+        $surveyQuestion = new App\SurveyQuestion();
+        $surveyQuestion->survey_id = 2;
+        $surveyQuestion->question_id = 9;
         $surveyQuestion->order = 1;
         $surveyQuestion->save();
 

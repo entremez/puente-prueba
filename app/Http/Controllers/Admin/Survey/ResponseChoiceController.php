@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin\Survey;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\ResponseChoice as Responses;
+use App\ResponseChoice as ResponseChoice;
+use App\Response as Response;
 use App\Question as Question;
 
 class ResponseChoiceController extends Controller
@@ -16,8 +17,8 @@ class ResponseChoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $responses = Responses::where('question_id', $request->input('question'))->get();
-        return view('admin.survey.response_choises-index')->with(compact('responses'));
+        $question = Question::find($request->input('question'));
+        return view('admin.survey.response_choises-index')->with(compact('question'));
     }
 
     /**
@@ -39,7 +40,12 @@ class ResponseChoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = new ResponseChoice();
+        $response->question_id = $request->input('question');
+        $response->response = $request->input('response');
+        $response->weight = $request->input('weight');
+        $response->save();
+        return redirect('admin/response_choices/?question='.$request->input('question'));
     }
 
     /**
@@ -73,7 +79,11 @@ class ResponseChoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $response = ResponseChoice::find($id);
+        $response->response = $request->input('response');
+        $response->weight = $request->input('weight');
+        $response->save();
+        return redirect()->back();
     }
 
     /**
@@ -82,8 +92,14 @@ class ResponseChoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $responseChoice = ResponseChoice::find($id);
+        $responseChoice->delete();
+        if($request->ajax())
+            return response()->json([
+                'message' => 'Ok'
+            ]);
+        return redirect()->back();
     }
 }

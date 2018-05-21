@@ -5,7 +5,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('surveys.index') }}">Encuestas</a></li>
-    <li class="breadcrumb-item active" aria-current="page"> {{ $survey->name}}</li>
+    <li class="breadcrumb-item active" aria-current="page"> Encuesta: {{ $survey->name}}</li>
 </ol>
 <div class="container">
     @if(Session::has( 'success' ))
@@ -25,8 +25,8 @@
                     <h3>{{ $survey->name}}  </h3>
                     <form method="get" action="{{ route('questions.create', $survey->id) }}">
                         <input type="hidden" name="survey" value="{{ $survey->id}}">
-                        <button class="btn btn-primary ml-3">Agregar pregunta</button>
                     </form>
+                        <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#addQuestion">Agregar pregunta</button>
                 </div>
                 <table class="table table-bordered">
                   <thead class="thead-dark">
@@ -64,8 +64,8 @@
                                 </tbody>
                                 </table>
                             @endif
-                            <form method="get" action="{{ route('response_choices.index', $survey->id) }}">
-                                <input type="hidden" name="question" value="{{ $question->first()->question()->get()->first()->id}}">
+                            <form method="get" action="{{ route('response_choices.index') }}">
+                                <input type="hidden" name="question" value="{{ $question->question_id }}">
                                 <button class="btn btn-info">
                                     @if($question->question()->get()->first()->response_choices()->get()->count()>0)
                                         Agregar o gestionar respuestas
@@ -83,5 +83,41 @@
                 </table>
             </div>
     </div>
+</div>
+
+<div class="modal fade" id="addQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar pregunta a {{ $survey->name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST" action="{{ route('questions.store') }}">
+          <div class="modal-body">
+                {{ csrf_field() }}
+                <input type="hidden" name="survey" value="{{ $survey->id }}">
+                <div class="form-group">
+                    <label for="question">Pregunta</label>
+                    <input type="text" class="form-control" id="question" placeholder="Pregunta" name="question" value="{{ old('question') }}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Tipo de pregunta</label>
+                    <select class="custom-select" name="type">
+                        <option selected>Seleccionar</option>
+                        @foreach(App\QuestionType::get() as $type)
+                        <option value="{{ $type->id }}" {{ (old('type') == $type->id ? 'selected':'') }}>{{ $type->type }}</option>
+                        @endforeach
+                    </select>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </div>
+      </form>
+    </div>
+  </div>
 </div>
 @endsection
