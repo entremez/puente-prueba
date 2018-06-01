@@ -1,15 +1,20 @@
 <?php
 
 Route::get('/', 'HomeController@welcome' )->name('welcome');
+Route::post('/', 'HomeController@viewMore')->name('welcome.load.more');
+
 Route::get('/case/{instance}', 'InstanceController@show')->name('case');
+Route::post('/case/{id}', 'CounterController@provider')->name('provider.counter');
+
 Route::get('/tag/{service}', 'ServiceController@show')->name('service');
 Route::get('/providers/{provider}', 'ProviderController@detail')->name('provider');
 Route::get('/provider', 'ProviderController@show')->name('providers-list');
 Route::post('/provider', 'ProviderController@filtered')->name('providers-list');
 
-Route::get('/travel','TravelController@mainTravel')->middleware('auth.travel')->name('travel');
-Route::get('/login/travel', 'Auth\LoginController@showLoginFormTrip')->name('travel.login');
-Route::get('/guest/travel','TravelController@guestTravel')->name('travel.guest');
+
+
+/*Route::get('/login/travel', 'Auth\LoginController@showLoginFormTrip')->name('travel.login');
+Route::get('/guest/travel','TravelController@guestTravel')->name('travel.guest');*/
 
 Auth::routes();
 
@@ -71,4 +76,6 @@ Route::group([
 {
     Route::get('/dashboard', 'CompanyController@index')->name('company.dashboard');
     Route::get('/timeline', 'CompanyController@timeline')->name('timeline');
+    Route::get('/travel','TravelController@travel')->name('travel');
+    Route::post('/travel','TravelController@responses')->name('responses');
 });

@@ -13,6 +13,15 @@ class SurveyResponse extends Model
 
     public function responses()
     {
-        return $this->hasMany('App\Response', 'survey_reponse_id');
+        return $this->hasMany('App\Response', 'survey_response_id');
+    }
+
+    public function getTotalAttribute()
+    {
+        $total = 0;
+        foreach ($this->responses()->get() as  $value) {
+            $total+=$value->total * $value->response_choice()->first()->weight;
+        };
+        return $total;
     }
 }

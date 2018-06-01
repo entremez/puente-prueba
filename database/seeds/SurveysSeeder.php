@@ -23,6 +23,10 @@ class SurveysSeeder extends Seeder
         $question_type->type = "Selección única";
         $question_type->description = "Es posible seleccionar solo una de las opciones entregadas";
         $question_type->save();
+        $question_type = new App\QuestionType();
+        $question_type->type = "Rango";
+        $question_type->description = "Se debe seleccionar entre un rango determinado";
+        $question_type->save();
         $question_types = App\QuestionType::all();
         $question_types->each(function($question_type){
             $questions = factory(App\Question::class, 5)->make();

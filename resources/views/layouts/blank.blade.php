@@ -118,17 +118,10 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script src="{{ asset('js/mk/core/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/mk/core/popper.min.js') }}"></script>
-    <script src="{{ asset('js/mk/bootstrap-material-design.js') }}"></script>
-    <!--  Plugin for Date Time Picker and Full Calendar Plugin  -->
-    <script src="{{ asset('js/mk/plugins/moment.min.js') }}"></script>
-    <!--    Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-    <script src="{{ asset('js/mk/plugins/bootstrap-datetimepicker.min.js') }}"></script>
-    <!--    Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script src="{{ asset('js/mk/plugins/nouislider.min.js') }}"></script>
-    <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
-    <script src="{{ asset('js/mk/material-kit.js?v=2.0.2') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/js.js') }}"></script>
 
 

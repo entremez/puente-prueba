@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function name(){
+    public function instance(){
         switch (Auth::user()->type) {
             case 'Admin':
                 $object = $this->hasOne('App\Admin', 'id', 'type_id');
@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function getNameAttribute()
     {
-        return $this->name()->name;
+        return $this->instance()->name;
     }
 
     public function getDashboardAttribute()

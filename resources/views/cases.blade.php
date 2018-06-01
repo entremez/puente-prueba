@@ -1,12 +1,9 @@
-@extends('layouts.blank')
-@section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-@endsection
+@extends('layouts.puente')
 
 @section('content')
 <div class="container">
-<br><br><br>
-</div>
+
+
 <div class="row">
     <div class="col-md-5">
         <div class="card card-raised card-carousel" style="max-width: 600px">
@@ -52,17 +49,26 @@
 <div class="row">
     <div class="col-md-8">
         <h2 class="mt-2">{{ $instance->provider->name }}</h2>
-        <p><i class="material-icons">location_on</i> {{ $instance->provider->address }}</p>
-        <p><i class="material-icons">web</i> {{ $instance->provider->web }}</p>
-        <p><i class="material-icons">mail</i> {{ $instance->provider->email }}</p>
-        <p><i class="material-icons">description</i> {{ $instance->provider->description }}</p>
-        <p>
-            <a  href="{{ route('provider',$instance->provider->id) }}" class="btn btn-primary btn-round">
-                <i class="material-icons">add</i> Ver todos los proyectos realizados por la empresa {{ $instance->provider->name }}
-            </a>
-        </p>
+        <button class="btn btn-info btn-view-more">Contacta a {{ $instance->provider->name }} para más información</button>
+        <div class="view-more">
+            <br>
+            <p><i class="material-icons">location_on</i> {{ $instance->provider->address }}</p>
+            <p><i class="material-icons">web</i> {{ $instance->provider->web }}</p>
+            <p><i class="material-icons">mail</i> {{ $instance->provider->email }}</p>
+            <p><i class="material-icons">description</i> {{ $instance->provider->description }}</p>
+            <p>
+                <a  href="{{ route('provider',$instance->provider->id) }}" class="btn btn-primary btn-round">
+                    <i class="material-icons">add</i> Ver todos los proyectos realizados por la empresa {{ $instance->provider->name }}
+                </a>
+            </p>
+        </div>
     </div>
 </div>
+</div>
 
+<form method="post" action="{{ route('provider.counter', ':PROVIDER_ID') }}" id="form-provider">
+    <div id="token" style="display: none;">{!! json_encode(csrf_token()) !!}</div>
+    <input type="hidden" name="provider_id" value="{{ $instance->provider->user()->get()->first()->id }}">
+</form>
 
 @endsection

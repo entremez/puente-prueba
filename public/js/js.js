@@ -1,5 +1,6 @@
+$(document).ready(function () {
 
-    $("#menu-toggle").click(function(e) {
+/*    $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         if($("#menu-toggl").text() == 'arrow_back'){
@@ -7,7 +8,10 @@
         }else{
             $("#menu-toggl").text('arrow_back');
         }
-    });
+    });*/
+
+
+});
 
 
 
@@ -44,3 +48,6 @@ console.log (files);
     }
 
 document.getElementById('files').addEventListener('change', archivo, false);
+
+
+

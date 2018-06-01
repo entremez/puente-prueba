@@ -1,13 +1,14 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 @section('timeline', 'active')
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/simple-sidebar.css') }}">
-
 @endsection
+ --}}
 
+@extends('layouts.puente')
+@section('title','Timeline')
 @section('content')
 
-@if($surveys->count() > 0)
+@if($number_of_surveys > 0)
 <h2>Tu progreso</h2>
     <div class="row">
         <div class="col-md-12">
@@ -17,11 +18,11 @@
                     <div class="timeline-badge"><i class="material-icons">location_on</i></div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4 class="timeline-title">Nivel {{ $survey->result }}</h4>
-                            <p><small class="text-muted"><i class="material-icons" style="font-size: 11px">access_time</i> {{ $survey->created_at }}</small></p>
+                            <h4 class="timeline-title">Total {{ $survey->total }}</h4>
+                            <p><small class="text-muted"><i class="material-icons" style="font-size: 11px">access_time</i> {{ Carbon\Carbon::parse($survey->created_at)->format( 'd/m/Y') }}</small></p>
                         </div>
                         <div class="timeline-body">
-                            <p>{{ $description }}</p>
+                            <p></p>
                         </div>
                     </div>
                 </li>

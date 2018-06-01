@@ -10,7 +10,7 @@ class Company extends Model
         'rut', 'dv_rut', 'name', 'address'
     ];
 
-    public function surveys(){
-        return $this->hasMany('App\CompanySurvey');
+    public function survey_responses(){
+        return $this->hasMany('App\SurveyResponse');
     }
 }

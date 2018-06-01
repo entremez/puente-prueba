@@ -28,7 +28,8 @@
                       <th scope="col">Nombre</th>
                       <th scope="col">Descripción</th>
                       <th scope="col">Preguntas</th>
-                      <th scope="col">N° de veces respondida</th>
+                      <th scope="col"># Respuestas</th>
+                      <th scope="col">Activar</th>
                       <th scope="col">Acciones</th>
                     </tr>
                   </thead>
@@ -36,18 +37,19 @@
                     @foreach ($surveys as $key=>$survey)
                     <tr data-id = "{{ $survey->id }}">
                         <th scope="row">{{ $key+1 }}</th>
-                        <td>{{ $survey->name }}
-                                <span class="badge badge-pill badge-success {{ $survey->active ? '' : 'd-none'}}" id = "active">Activa</span>
-                        </td>
+                        <td>{{ $survey->name }}</td>
                         <td>{{ $survey->description }}</td>
                         <td>{{ $survey->survey_questions()->get()->count() }}</td>
                         <td>{{ $survey->survey_responses()->get()->count() }}</td>
                         <td>
+                            <label class="switch">
+                                <input class="activate" type="checkbox" {{ $survey->active ? 'checked' : ''}}>
+                                <span class="slider round"></span>
+                            </label></td>
+                        <td>
                             <a href="{{ route('surveys.edit', $survey->id ) }}" class="btn btn-info">editar</a>
                             <a href="{{ route('surveys.show', $survey->id ) }}" class="btn btn-primary">ver+</a>
                             <a href="#!" class = "btn btn-danger btn-destroy">Borrar</a>
-                            <a href="#!" class="btn btn-success btn-activate {{ $survey->active ? 'd-none' : ''}}">Activar</button>
-
                         </td>
                     </tr>
                     @endforeach

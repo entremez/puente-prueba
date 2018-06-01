@@ -26,7 +26,7 @@ class Provider extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'type_id', 'id');
+        return $this->hasOne('App\User', 'type_id');
     }
 
     public function getEmailAttribute()

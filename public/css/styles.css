@@ -1,0 +1,354 @@
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.range-slider {
+  margin: 60px 0 0 0%;
+}
+
+.range-slider {
+  width: 100%;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  width: 90%;
+  height: 10px;
+  border-radius: 5px;
+  background: #d7dcdf;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  // Range Handle
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2c3e50;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: #1abc9c;
+    }
+  }
+
+  &:active::-webkit-slider-thumb {
+    background: #1abc9c;
+  }
+
+  &::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: #2c3e50;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: #1abc9c;
+    }
+  }
+
+  &:active::-moz-range-thumb {
+    background: #1abc9c;
+  }
+
+  // Focus state
+  &:focus {
+
+    &::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px #fff,
+                  0 0 0 6px #1abc9c;
+    }
+  }
+}
+
+
+// Range Label
+.range-slider__value {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: #2c3e50;
+  padding: 5px 10px;
+  margin-left: 8px;
+
+  &:after {
+    position: absolute;
+    top: 8px;
+    left: -7px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 7px solid #2c3e50;
+    border-bottom: 7px solid transparent;
+    content: '';
+  }
+}
+
+
+// Firefox Overrides
+::-moz-range-track {
+    background: #d7dcdf;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+  border: 0;
+}
+}
+
+.counter {
+    background-color: #666;
+}
+.counter-overlay {
+    padding-top: 120px;
+    padding-bottom: 120px;
+
+}
+.counter-item i {
+    color: #000;
+    font-size: 60px;
+}
+.counter-item h2 {
+    font-family: "Source Sans Pro", sans-serif;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 35px;
+    margin-top: 15px;
+    margin-bottom: 1px;
+}
+.counter-item p {
+    color: #000;
+    font-size: 20px;
+    margin-top: 0px;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+
+body {
+    width: 100%!important;
+    margin: 0 auto;
+}
+/*Ver más empresa*/
+
+.view-more {
+    display: none;
+}
+
+.menu {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.slider-home {
+    width: 70%;
+    margin: 0 auto;
+
+}
+
+.carousel-item img {
+  max-height: 500px!important;
+  min-width: auto;
+}
+
+.carousel-caption.d-none.d-md-block {
+    margin-bottom: 150px!important;
+}
+
+.carousel-caption.d-none.d-md-block h5{
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+.instances {
+    width: 70%;
+    margin:0 auto;
+}
+
+.section-title p {
+    font-size: 24px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.footer-service, .footer-provider {
+    height: 50px;
+    background-color: #000;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.footer-service p , .footer-provider p {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#remove-row {
+    margin-bottom: 50px;
+}
+
+#load-data img:hover{
+    background-color: rgba(45,23,3,0.6);
+}
+
+.plus {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.plus p {
+    line-height: 21px;
+    font-size: 18px;
+}
+
+.provider {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.image-provider {
+    position: relative;
+    width: 100%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-provider:hover .image {
+  opacity: 0.3;
+}
+
+.image-provider:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+.footer {
+  margin-top: 50px;
+  bottom: 0;
+  width: 100%;
+  line-height: 160px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+.container-footer {
+    width:70%;
+    margin: 0 auto;
+}
+
+.container-footer .btn {
+    text-align: center!important;
+    margin: 0 auto!important;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border-style: none;
+    border-radius: 0;
+}
+
+.container-footer .btn:hover {
+    color: #1E26D2;
+    background-color: #f5f5f5;
+    text-decoration: none;
+    border-style: none;
+}
+
+.container-footer ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+    height: auto;
+    line-height: 20px;
+    margin-top: -50px;
+}
