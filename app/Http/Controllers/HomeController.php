@@ -45,12 +45,17 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $services = Service::orderBy('created_at','DESC')->limit(6)->get();
+        $cases = Instance::inRandomOrder()->limit(8)->get();
         $providers = Provider::orderBy('created_at','DESC')->limit(3)->get();
         return view('welcome',[
-            'services' => $services,
+            'cases' => $cases,
             'providers' => $providers
         ]);
+    }
+
+    public function evaluate()
+    {
+        return view('evaluate');
     }
 
     public function viewMore(Request $request)

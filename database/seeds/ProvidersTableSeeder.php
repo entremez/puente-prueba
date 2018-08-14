@@ -8,6 +8,7 @@ use App\Instance;
 use App\InstanceService;
 use App\Service;
 use App\ProviderService;
+use App\Category;
 
 class ProvidersTableSeeder extends Seeder
 {
@@ -18,7 +19,6 @@ class ProvidersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Service::class, 15)->create();
         $providers = factory(Provider::class, 10)->create();
         $providers->each(function($provider){
                 $user = factory(User::class)->create();
@@ -29,8 +29,9 @@ class ProvidersTableSeeder extends Seeder
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();
                 for ($i=0; $i < rand(3,6); $i++) {
+                    $randa = rand(0,45);
                     $provider_service = new ProviderService();
-                    $provider_service->service_id = $services[$i]->id;
+                    $provider_service->service_id = $services[$randa]->id;
                     $provider_service->provider_id = $provider->id;
                     $provider_service->save();
                     $servicios[$i] = $provider_service->service_id;

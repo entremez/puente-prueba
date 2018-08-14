@@ -9,7 +9,7 @@ $factory->define(App\Provider::class, function (Faker $faker) {
         'name' => $faker->company,
         'address' => $faker->address,
         'web' => $faker->domainName,
-        'logo' => $faker->imageUrl(640, 480,'cats'),
+        'logo' => 'https://picsum.photos/280/280?image='.rand(0,1084),
         'phone' => $faker->e164PhoneNumber,
         'description' => $faker->sentence(10),
         'long_description' => $faker->text,

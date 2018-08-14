@@ -1,80 +1,60 @@
-@extends('layouts.blank')
-@section('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-@endsection
+
+@extends('layouts.puente')
+@section('title', 'PDE | '.$provider->name)
 
 @section('content')
-<br><br><br>
-<div class="row">
-    <div class="col-md-6 ">
-        <img src="{{ $provider->url }}" class="rounded mx-auto d-block img-fluid" alt="...">
-    </div>
-    <div class="col-md-6 text-center">
-        <h1>{{ $provider->name }}</h1>
-        <p>{{ $provider->description }}</p>
-        <p>{{ $provider->long_description }}</p>
-            <div class="row text-left">
-                <div class="col-md-1"><i class="material-icons">mail_outline</i></div>
-                <div class="col-md-11"><p>{{ $provider->email }}</p></div>
-            </div>
-            <div class="row text-left">
-                <div class="col-md-1"><i class="material-icons">phone</i></div>
-                <div class="col-md-11"><p>{{ $provider->phone }}</p></div>
-            </div>
-            <div class="row text-left">
-                <div class="col-md-1"><i class="material-icons">fingerprint</i></div>
-                <div class="col-md-11"><p>{{ Rut::parse($provider->rut."-".$provider->dv_rut)->format()}}</p></div>
-            </div>
-            <div class="row text-left">
-                <div class="col-md-1"><i class="material-icons">location_on</i></div>
-                <div class="col-md-11"><p>{{ $provider->address }}</p></div>
-            </div>
-            <div class="row text-left">
-                <div class="col-md-1"><i class="material-icons">settings</i></div>
-                <div class="col-md-11">
-                @foreach($provider->services()->get() as $service)
-                    <span class="badge badge-success">
-                        {{ $service->service()->get()->first()->name }}
-                    </span>
-                @endforeach
-                </div>
-            </div>
-    </div>
-</div>
-<br>
-<div class="row">
-    <h2>Casos de éxito de {{ $provider->name }}</h2>
+
+@include('partials/menu')
+
+<section class="header-provider">
     <div class="container">
         <div class="row">
-            @foreach($cases as $case)
-
-            <div class="col-md-4 ">
-                <div class="card">
-                    <img class="card-img-top" src="{{ $case->featured_image_providers }}" alt="Card image cap">
-                    <div class="card-body">
-                        @foreach($case->services as $services)
-                                @foreach($services->services as $service)
-                                <a href="{{ route('service',$service) }}">
-                                    <span class="badge badge-success">
-                                        {{ $service->name }}
-                                    </span>
-                                </a>
-                                @endforeach
-                        @endforeach
-                        <h5 class="card-title">{{ ucfirst($case->name) }}</h5>
-                        <p class="card-text">{{ $case->description }}</p>
-                        <a href="{{ route('case', $case->id) }}" class="btn btn-primary text-center">Ver caso</a>
-                    </div>
-
+            <div class="col-md-8">
+                <div class="provider-subtitle">
+                    @foreach($service as $s)
+                    <span class="badge badge-info">{{ $s->name }}</span>
+                    @endforeach
                 </div>
-                <br>
+                <div class="provider-name">
+                    <h3>{{ $provider->name }}</h3>
+                </div>
+                <div class="provider-description">
+                    {{ $provider->long_description }}
+                </div>
+
+                <div class="provider-contact">
+                    <h3>Contacto</h3>
+                    <div class="row text-left">
+                        <div class="col-md-1"><i class="material-icons">mail_outline</i></div>
+                        <div class="col-md-11"><p>{{ $provider->email }}</p></div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col-md-1"><i class="material-icons">phone</i></div>
+                        <div class="col-md-11"><p>{{ $provider->phone }}</p></div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col-md-1"><i class="material-icons">fingerprint</i></div>
+                        <div class="col-md-11"><p>{{ Rut::parse($provider->rut."-".$provider->dv_rut)->format()}}</p></div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col-md-1"><i class="material-icons">location_on</i></div>
+                        <div class="col-md-11"><p>{{ $provider->address }}</p></div>
+                    </div>
+                </div>
             </div>
-
-
-            @endforeach
-       </div>
+            <div class="col-md-4">
+                <img class="provider-image" src="{{ $provider->logo }}">
+                <a href="#" class="btn btn-danger provider-btn">Contacto</a>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
+<section class="provider-cases mt-4">
+    <div class="container">
+        <h3>Más casos de {{ $provider->name }}</h3>
+        @include('partials/instances')
+    </div>
+</section>
 
-@endsection
+@include('partials/footer')

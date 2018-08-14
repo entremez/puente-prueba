@@ -1,16 +1,18 @@
 <?php
 
 Route::get('/', 'HomeController@welcome' )->name('welcome');
-Route::post('/', 'HomeController@viewMore')->name('welcome.load.more');
+
+Route::get('/cases', 'InstanceController@index')->name('cases');
+Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
+
+Route::get('/provider', 'ProviderController@show')->name('providers-list');
+Route::post('/provider/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
+Route::get('/provider/{provider}', 'ProviderController@detail')->name('provider');
 
 Route::get('/case/{instance}', 'InstanceController@show')->name('case');
 Route::post('/case/{id}', 'CounterController@provider')->name('provider.counter');
 
 Route::get('/tag/{service}', 'ServiceController@show')->name('service');
-Route::get('/providers/{provider}', 'ProviderController@detail')->name('provider');
-Route::get('/provider', 'ProviderController@show')->name('providers-list');
-Route::post('/provider', 'ProviderController@filtered')->name('providers-list');
-
 
 
 /*Route::get('/login/travel', 'Auth\LoginController@showLoginFormTrip')->name('travel.login');

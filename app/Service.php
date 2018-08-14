@@ -16,6 +16,10 @@ class Service extends Model
     }
 
     public function providers(){
-        return $this->hasMany('App\ProviderService','provider_id','id');
+        return $this->hasMany('App\ProviderService','service_id','id');
+    }
+
+    public function category(){
+        return $this->belongsTo('App\Category');
     }
 }

@@ -16,9 +16,6 @@
 <section class="filters">
     <div class="container">
         <div class="row">
-            <h4>¿Qué servicio de diseño necesitas?</h4>
-        </div>
-        <div class="row">
             @foreach($categories as $category)
                 <div class="col-md-3">
                     <div class="service">
@@ -26,7 +23,7 @@
                         <ul>
                             @foreach($services as $service)
                                 @if($service->category_id == $category->id)
-                                    <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="service-filter">{{ $service->name }}</a></li>
+                                    <li class="{{ $service->id == $selected->id?'selected':'' }}"><a href="{{ route('providers-list-filtered', $service->id) }}">{{ $service->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -37,21 +34,13 @@
     </div>
 </section>
 
-<form method="post" action="{{ route('providers-list-filtered', ':SERVICE_ID') }}" id="form-filter">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-</form>
-
 <section class="results" id="results">
     <div class="container">
+    <h2>{{ $selected->name }}</h2>
         <div class="row">
             @foreach($providers as $provider)
                 <div class="col-md-3">
-                    <a href="{{ route('provider', $provider->id) }}">
-                        <img class="img-fluid w-100-h-200 image-provider" src="{{ $provider->getUrlAttribute() }}" alt="{{ $provider->id }}">
-                        <div class="middle-provider">
-                                <div class="text-provider">{{ $provider->name }}</div>
-                        </div>
-                    </a>
+                    <img src="{{ $provider->provider()->first()->getUrlAttribute() }}" alt="{{ $provider->id }}">
                 </div>
             @endforeach
         </div>

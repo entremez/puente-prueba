@@ -13,8 +13,8 @@ class CompanyController extends Controller
     public function index()
     {
         $surveys = auth()->user()->instance()->survey_responses();
-        $last_trip = auth()->user()->instance()->survey_responses()->orderBy('created_at', 'desc')->first()->created_at;
-        $actual_result = $surveys->orderBy('created_at', 'desc')->get()->first()->total;
+        $last_trip = "2018-08-13 11:19:57";
+        $actual_result = 27;
         return view('company.dashboard',[
             'number_of_surveys' => count($surveys->get()),
             'last_trip' => \Carbon\Carbon::parse($last_trip)->format('d-m-Y'),

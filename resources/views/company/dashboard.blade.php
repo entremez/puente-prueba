@@ -1,39 +1,32 @@
-{{--
-    extends('layouts.app')
-@section('dashboard', 'active')
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/simple-sidebar.css') }}">
-{!! Charts::styles() !!}
-@endsection
 
---}}
 @extends('layouts.puente')
-@section('title','Dashboard')
+@section('title', 'PDE | Dashboard')
 
 @section('content')
 
-@if($number_of_surveys > 0)
-    <div id="page-content-wrapper" class="text-center pt-0" >
-            <h2 class="mt-0">Inicia el viaje</h2>
-            <span class="h7">Último viaje: {{ $last_trip }}</span><br>
-            <div class="pt-3">
-                <a href="{{ route('travel') }}" class="btn btn-primary btn-round">
-                    <i class="material-icons">flight_takeoff</i>
-                </a>
-            </div>
-        <div class="container">
-            <div class="pt-3 text-center">
-                <p>Estado actual: {{ $actual_result }}</p>
+@include('partials/menu')
+<section class="company-dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 vertical-line">
+                <div class="container-progressbar">
+                    <ul class="progressbar">
+                              <li class="active">Registrate <br>
+                              <p class="progressbar-text">Registra tu empresa para poder evaluarla. En tu perfil quedarán los registros de tus evaluaciones</p></li>
+                              <li class="active">Cuestionario <br>
+                              <p class="progressbar-text">Responde el cuestionario para evaluar tu empresa. No te tomará más de 5 minutos.</p></li>
+                              <li class="active">Diagnostico <br>
+                              <p class="progressbar-text">Después de contestar el cuestionario, se te entregará el diagnóstico de tu empresa.</p></li>
+                              <li>Proveedores <br>
+                              <p class="progressbar-text">En la sección de proveedores podrás buscar quien te puede ayudar con tu empresa según lo diagnosticado.</p></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-@else
-    <h2 class="mt-0">Inicia el viaje</h2>
-    <span class="h7">No tenemos nada que mostrarte aun, inicia el viaje y sigue tus resultados.</span><br>
-    <div class="pt-3">
-        <button class="btn btn-primary btn-round">
-            <i class="fa fa-plane"></i>
-        </button>
-    </div>
-@endif
-@endsection
+</section>
+
+@include('partials/footer')
+
+
+

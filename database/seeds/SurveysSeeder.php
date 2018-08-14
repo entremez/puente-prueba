@@ -78,6 +78,8 @@ class SurveysSeeder extends Seeder
             $response = new App\Response();
             $response->survey_response_id = $survey_response->id;
             $response->response_choice_id = App\ResponseChoice::where('question_id',$question->id)->inRandomOrder()->get()->first()->id;
+            $response->total=0;
+            $response->audit="sdasd";
             $response->save();
         }
 
@@ -91,6 +93,8 @@ class SurveysSeeder extends Seeder
             $response = new App\Response();
             $response->survey_response_id = $survey_response->id;
             $response->response_choice_id = App\ResponseChoice::where('question_id',$question->id)->inRandomOrder()->get()->first()->id;
+            $response->total=0;
+            $response->audit="sdasd";
             $response->save();
         }
     }

@@ -1,4 +1,40 @@
 $(document).ready(function () {
+
+
+    $('.service-filter').click(function(event) {
+        event.preventDefault();
+        var lis = $(this).parents('.container').children('.row').children('.col-md-3').find('a');
+        $.each(lis, function(){
+            $(this).removeClass();
+        });
+        $(this).addClass('selected');
+        //var title = $(this).parents('.service').find('h3').text();
+        var title = $(this).text();
+        var serviceId = $(this).parents('li').data('id');
+        var url = $('#form-filter').attr('action').replace(':SERVICE_ID', serviceId);
+        var data = $('#form-filter').serialize();
+
+        $.post(url, data, function (result){
+            $('.results').children('container').remove();
+            var text ='';
+            text = '<div class="container"><h3>'+title+'</h3><div class="row">';
+            $.each(result, function () {
+                  text += '<div class="col-md-3"><a href="/provider/'+this.id+'"><img class="img-fluid w-100-h-200 image-provider" src="'+this.logo +'" alt="'+this.name +'"><div class="middle-provider"><div class="text-provider">'+this.name +'</div></div></a></div>';
+              });
+            text+= '</div></div>';
+            $('.results').html(text);
+             var new_position = $('#results').offset();
+             window.scrollTo(new_position.left,new_position.top);
+        });
+    });
+
+
+    $('.provider-btn').click(function(e){
+        e.preventDefault();
+        $(this).fadeOut();
+        $('.provider-contact').fadeIn();
+    });
+
     $('.btn-destroy').click(function (e){
         e.preventDefault();
         var row = $(this).parents('tr');
