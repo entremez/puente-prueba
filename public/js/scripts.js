@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+  $("#modal-setting").modal("show");
+
+  $('#modal-send').click(function(){
+    console.log($("select#foo option:checked").val());
+  });
+
+    $('#send-survey').click(function(event){
+      event.preventDefault();
+      var data = $('#survey-form').serialize();
+      $('#survey-form').submit();
+    });
+
 
     $('.service-filter').click(function(event) {
         event.preventDefault();
@@ -33,6 +45,11 @@ $(document).ready(function () {
         e.preventDefault();
         $(this).fadeOut();
         $('.provider-contact').fadeIn();
+        var id = $(this).data('id')
+        var url = $('#form-counter').attr('action').replace(':PROVIDER_ID', id);
+        var data = $('#form-counter').serialize();
+        $.post(url, data);
+
     });
 
     $('.btn-destroy').click(function (e){
@@ -42,7 +59,6 @@ $(document).ready(function () {
         var form = $('#form-destroy')
         var url = form.attr('action').replace(':SURVEY_ID', id)
         var data = form.serialize();
-        console.log(url);
 
         $.post(url, data, function(result){
             row.fadeOut();

@@ -44,11 +44,16 @@
             </div>
             <div class="col-md-4">
                 <img class="provider-image" src="{{ $provider->logo }}">
-                <a href="#" class="btn btn-danger provider-btn">Contacto</a>
+                <a href="#" data-id="{{ $provider->id }}" class="btn btn-danger provider-btn">Contacto</a>
             </div>
         </div>
     </div>
 </section>
+
+<form method="post" action="{{ route('provider-counter', ':PROVIDER_ID') }}" id="form-counter">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="counter_id" value="{{ $counterId }}">
+</form>
 
 <section class="provider-cases mt-4">
     <div class="container">

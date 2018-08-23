@@ -13,7 +13,7 @@
 .slider {
   position: absolute;
   cursor: pointer;
-/*  top: 0;*/
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -252,6 +252,10 @@ body {
     margin-bottom: 20px;
 }
 
+.service a:hover{
+  text-decoration: none;
+}
+
 .footer-service p , .footer-provider p {
     padding-top: 10px;
     text-align: center;
@@ -321,9 +325,9 @@ body {
 }
 
 .footer {
-  flex-shrink: 0;
   margin-top: 50px;
   bottom: 0;
+  flex-shrink: 0;
   background-color: #000033;
   color: white;
 }
@@ -723,6 +727,13 @@ body {
   .progressbar li.active + li:after {
       background-color: #55b776;
   }
+  .progressbar li p {
+      color: black;
+      text-transform: initial;
+      text-align: justify;
+      text-justify: inter-word;
+      font-size: 11px;
+  }
 
   .company-dashboard {
     margin-top: 160px;
@@ -732,4 +743,17 @@ body {
     padding-top: 10px;
     padding-left: 5px;
     padding-right: 5px;
+
   }
+
+   .form {
+    margin-top: 160px;
+  }
+
+    .surveys-container {
+    margin-top: 120px;
+  }
+
+.modal-survey{
+  max-width: 80%!important;
+}

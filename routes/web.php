@@ -8,9 +8,10 @@ Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
 Route::get('/provider', 'ProviderController@show')->name('providers-list');
 Route::post('/provider/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
 Route::get('/provider/{provider}', 'ProviderController@detail')->name('provider');
+Route::post('/provider/c/{providerId}', 'ProviderController@counterClick')->name('provider-counter');
 
 Route::get('/case/{instance}', 'InstanceController@show')->name('case');
-Route::post('/case/{id}', 'CounterController@provider')->name('provider.counter');
+Route::post('/case/{provider}', 'CounterController@provider')->name('provider.counter');
 
 Route::get('/tag/{service}', 'ServiceController@show')->name('service');
 
@@ -40,6 +41,7 @@ Route::group([
     Route::post('/register', 'RegisterController@create');
 
     Route::resource('surveys', 'Survey\SurveyController');
+
     Route::resource('questions', 'Survey\QuestionController');
     Route::resource('question_types', 'Survey\QuestionTypeController');
     Route::resource('response_choices', 'Survey\ResponseChoiceController');
@@ -77,6 +79,9 @@ Route::group([
         function()
 {
     Route::get('/dashboard', 'CompanyController@index')->name('company.dashboard');
+    Route::post('results', 'CompanyController@results')->name('company.result');
+
+
     Route::get('/timeline', 'CompanyController@timeline')->name('timeline');
     Route::get('/travel','TravelController@travel')->name('travel');
     Route::post('/travel','TravelController@responses')->name('responses');

@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.puente')
+@section('title', 'PDE | Regístrate')
+
+@section('content')
+
+@include('partials/menu')
 
 @section('content')
 <div class="container">
@@ -74,4 +79,7 @@
         </div>
     </div>
 </div>
+
+@include('partials/footer')
+
 @endsection

@@ -9,6 +9,7 @@ use App\InstanceService;
 use App\Service;
 use App\ProviderService;
 use App\Category;
+use Illuminate\Support\Collection as Collection;
 
 class ProvidersTableSeeder extends Seeder
 {
@@ -19,12 +20,21 @@ class ProvidersTableSeeder extends Seeder
      */
     public function run()
     {
-        $providers = factory(Provider::class, 10)->create();
+        //$providers = factory(Provider::class, 10)->create();
+        $users = factory(User::class, 10)->create();
+        $providers = new Collection();
+        $users->each(function($user) use ($providers){
+                        $provider = factory(Provider::class)->create();
+                        $provider->user_id = $user->id;
+                        $provider->save();
+                        $providers->push($provider);
+                        $user->type_id = $provider->id;
+                        $user->type = "Provider";
+                        $user->save();
+                    });
+
+
         $providers->each(function($provider){
-                $user = factory(User::class)->create();
-                $user->type = "Provider";
-                $user->type_id = $provider->id;
-                $user->save();
                 $cases = factory(Instance::class, 3)->make();
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();

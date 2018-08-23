@@ -10,6 +10,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Rules\RutCompanyUnique;
 use App\Rules\RutValidate;
 use Freshwork\ChileanBundle\Rut;
+use Illuminate\Http\File;
+use App\City;
+use App\Employees;
+use App\Gain;
 
 class RegisterController extends Controller
 {
@@ -45,7 +49,11 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('company.register');
+        return view('company.register',[
+            'cities' => City::get(),
+            'employees' => Employees::get(),
+            'gains' => Gain::get()
+        ]);
     }
 
     /**
@@ -74,19 +82,25 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $rut = $this->getRut($data['rut']);
+
+        $user = User::create([
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'type' => "Company"
+        ]);
+
         $company = Company::create([
             'rut' => $rut[0],
             'dv_rut' => $rut[1],
             'name' => $data['name'],
             'address' => $data['address'],
+            'user_id' => $user->id,
         ]);
 
-        return User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'type' => "Company",
-            'type_id' => $company->id,
-        ]);
+        $user ->type_id = $company->id;
+        $user->save();
+
+        return $user;
     }
 
     private function getRut($rut){

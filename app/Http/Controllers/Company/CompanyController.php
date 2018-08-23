@@ -4,22 +4,27 @@ namespace App\Http\Controllers\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Charts;
-use App\Result;
-use Carbon\Carbon;
+use App\SurveyResponse as Travels;
+use App\Survey;
+use App\Traits\SurveyJsonTrait;
+
 
 class CompanyController extends Controller
 {
+
+    use SurveyJsonTrait;
+
     public function index()
     {
-        $surveys = auth()->user()->instance()->survey_responses();
-        $last_trip = "2018-08-13 11:19:57";
-        $actual_result = 27;
         return view('company.dashboard',[
-            'number_of_surveys' => count($surveys->get()),
-            'last_trip' => \Carbon\Carbon::parse($last_trip)->format('d-m-Y'),
-            'actual_result' => $actual_result
+                'travels' => Travels::where('company_id',auth()->user()->id)->get(),
+                'responses' => $this->getJson(Survey::where('active',1)->get()->first())
             ]);
+    }
+
+    public function results(Request $request)
+    {
+        dd($request);
     }
 
     public function timeline(){

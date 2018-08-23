@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin\Survey;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use App\Survey as Survey;
+use App\Traits\SurveyJsonTrait;
 
 
 class SurveyController extends Controller
 {
+    use SurveyJsonTrait;
     /**
      * Display a listing of the resource.
      *
@@ -62,10 +65,12 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Survey $survey)
     {
-        $survey = Survey::find($id);
-        return view('admin.survey.survey-show')->with(compact('survey'));
+        return view('admin.survey.survey-show', [
+                'survey' => $survey,
+                'responses' => $this->getJson($survey)
+            ]);
     }
 
     /**
@@ -133,7 +138,7 @@ class SurveyController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'id'      => $id,
-                'message' => "Usuario eliminado"
+                'message' => "Encuesta eliminada"
             ]);
         }
 

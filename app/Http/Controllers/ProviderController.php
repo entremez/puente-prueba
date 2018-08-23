@@ -9,6 +9,7 @@ use App\Instance;
 use App\Service;
 use App\ProviderService;
 use App\Category;
+use App\ProviderCounter;
 
 class ProviderController extends Controller
 {
@@ -36,6 +37,10 @@ class ProviderController extends Controller
 
     public function detail(Provider $provider)
     {
+        $providerCounter = new ProviderCounter();
+        $providerCounter->provider_id = $provider->id;
+        $providerCounter->ip = request()->ip();
+        $providerCounter->save();
         $services = $provider->services()->get();
         $service = new Collection();
         foreach ($services as $s) {
@@ -44,7 +49,19 @@ class ProviderController extends Controller
         return view('provider',[
             'provider' => $provider,
             'cases' => Instance::where('provider_id','=', $provider->id)->get(),
-            'service' => $service
+            'service' => $service,
+            'counterId' => $providerCounter->id
             ]);
     }
+
+    public function counterClick(Request $request, $providerId)
+    {
+        if($request->ajax()){
+            $counter = ProviderCounter::find($request->input('counter_id'));
+            $counter->contact_click = now();
+            $counter->save();
+        }
+    }
+
+
 }

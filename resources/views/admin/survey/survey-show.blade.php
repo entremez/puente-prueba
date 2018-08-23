@@ -2,12 +2,18 @@
 @section('title','Encuestas')
 
 @section('content')
+
+@include('partials/menu')
+
+
+<section class="surveys-container">
+<div class="container">
+
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('surveys.index') }}">Encuestas</a></li>
     <li class="breadcrumb-item active" aria-current="page"> Encuesta: {{ $survey->name}}</li>
 </ol>
-<div class="container">
     @if(Session::has( 'success' ))
             <div class="alert alert-success">
                 <button type="button" class="close" aria-label="Close" data-dismiss="alert">
@@ -27,6 +33,7 @@
                         <input type="hidden" name="survey" value="{{ $survey->id}}">
                     </form>
                         <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#addQuestion">Agregar pregunta</button>
+                        <button class="btn btn-info ml-3" data-toggle="modal" data-target="#preview">Vista previa</button>
                 </div>
                 <table class="table table-bordered">
                   <thead class="thead-dark">
@@ -85,6 +92,8 @@
     </div>
 </div>
 
+</section>
+
 <div class="modal fade" id="addQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -120,4 +129,9 @@
     </div>
   </div>
 </div>
+
+
+@include('survey-modal')
+
+
 @endsection

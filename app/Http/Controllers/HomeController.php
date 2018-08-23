@@ -8,6 +8,7 @@ use App\Instance;
 use App\User;
 use App\provider;
 use App\Service;
+use App\Category as EconomicActivity;
 
 class HomeController extends Controller
 {
@@ -43,13 +44,17 @@ class HomeController extends Controller
         return view('auth.login');
     }
 
+    public function FunctionName($value='')
+    {
+        # code...
+    }
+
     public function welcome()
     {
-        $cases = Instance::inRandomOrder()->limit(8)->get();
-        $providers = Provider::orderBy('created_at','DESC')->limit(3)->get();
         return view('welcome',[
-            'cases' => $cases,
-            'providers' => $providers
+            'cases' => Instance::inRandomOrder()->limit(8)->get(),
+            'providers' => Provider::orderBy('created_at','DESC')->limit(3)->get(),
+            'economic_activitys' => EconomicActivity::get()
         ]);
     }
 

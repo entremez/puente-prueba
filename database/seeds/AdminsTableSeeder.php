@@ -11,14 +11,18 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = App\Admin::create([
-            'name' => 'Admin'
-        ]);
-        App\User::create([
+        $user = App\User::create([
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456'),
-            'type' => 'Admin',
-            'type_id' => $admin->id
+            'type' => 'Admin'
         ]);
+
+        $admin = App\Admin::create([
+            'name' => 'Admin',
+            'user_id' => $user->id
+        ]);
+
+        $user->type_id = $admin->id;
+        $user->save();
     }
 }
