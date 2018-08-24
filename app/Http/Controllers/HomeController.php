@@ -8,7 +8,7 @@ use App\Instance;
 use App\User;
 use App\provider;
 use App\Service;
-use App\Category as EconomicActivity;
+use App\Classification as EconomicActivity;
 
 class HomeController extends Controller
 {
